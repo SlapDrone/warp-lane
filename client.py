@@ -10,11 +10,11 @@ from pathlib import Path
 #http://docs.python-requests.org/en/latest/user/quickstart/#post-a-multipart-encoded-file
 PORT = 8000
 SERVER_URL = f"http://localhost:{PORT}/upload"
-FILE_PATH = Path('./wu2017.pdf')
+FILE_PATH = Path('./media/clip.wav')
 
 if __name__ == "__main__":
     fin = open(FILE_PATH, 'rb')
-    files = {'file': (FILE_PATH.parts[-1], fin, 'application/pdf')}#)'file_names':'test.pdf'}
+    files = {'file': (FILE_PATH.parts[-1], fin, 'audio/x-wav')}
     try:
         r = requests.post(SERVER_URL, files=files)
         print(r.text)
