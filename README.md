@@ -1,6 +1,6 @@
 # Warp Lane
 
-Experiment with Sanic.
+Experiment with Sanic, receiving, modifying and serving back audio files.
 
 Install environment (requires [Anaconda](https://www.anaconda.com/products/individual)):
 
