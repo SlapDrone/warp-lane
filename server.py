@@ -1,7 +1,7 @@
 """
 server.py
 
-Receives an audio file over HTTP
+Receives an audio file over HTTP, warps it and sends it back
 """
 import os
 
