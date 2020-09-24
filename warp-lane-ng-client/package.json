@@ -11,8 +11,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "ng lint && ng test",
-      "pre-push": "ng e2e && ng test && ng build --aot true"
+      "pre-commit": "pre-commit.sh",
+      "pre-push": "pre-push.sh"
     }
   },
   "private": true,
