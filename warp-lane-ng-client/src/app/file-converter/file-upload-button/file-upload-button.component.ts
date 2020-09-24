@@ -20,10 +20,10 @@ export class FileUploadButtonComponent implements OnInit {
     webkitRelativePath: string
   };
 
+  public showSpinner = false;
+
   ngOnInit(): void {
   }
-
-  public showSpinner = false;
 
   uploadFile($event: { target: { files: any[]; }; }): void {
     this.uploadedFile = $event.target.files[0];
