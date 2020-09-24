@@ -93,28 +93,33 @@ async def process_upload(request):
         Path(app.config.UPLOAD_DIR).mkdir(exist_ok=True, parents=True)
 
     # Ensure a file was sent
-    upload_file = request.files.get('file')
-    if not upload_file:
+    # upload_file = request.files.get('file')
+    # if not upload_file:
+    if len(request.body) == 0:
+    
         return res.redirect("/?error=no_file")
 
     # Clean up the filename in case it creates security risks
-    filename = secure_filename(upload_file.name)
+    filename = secure_filename(request.headers['file-name'])
+    file_body = request.body # the binary file content
+    file_content_type = request.headers['content-type']
 
     # Ensure the file is a valid type and size, and if so
     # write the file to disk and redirect back to main
-    if not valid_file_type(upload_file.name, upload_file.type):
+    #if not valid_file_type(upload_file.name, upload_file.type):
+    if not valid_file_type(filename, file_content_type):
         logger.info(
             "Receive file with "
-            f"name: {upload_file.name}, type: {upload_file.type}"
+            f"name: {filename}, type: {file_content_type}"
         )
         return res.redirect('/?error=invalid_file_type')
-    elif not valid_file_size(upload_file.body):
-        return res.redirect('/?error=invalid_file_size')
+    # elif not valid_file_size(upload_file.body):
+    #     return res.redirect('/?error=invalid_file_size')
     else:
         # write to disk
         file_path = (f"{app.config.UPLOAD_DIR}/"
-                     f"{str(datetime.now()).replace(' ', '_')}_{upload_file.name}")
-        await write_file(file_path, upload_file.body)
+                     f"{str(datetime.now()).replace(' ', '_')}_{filename}")
+        await write_file(file_path, file_body)
         # TODO: probably a nicer way to factor this keeping upload and download
         # separate! redirect to separate page to download file?
         # Invert the audio sample and write to a new file
@@ -122,9 +127,20 @@ async def process_upload(request):
             Path(file_path),
             app.config.SERVE_DIR
         )
-        return res.redirect(f'/static/{inverted_file_path.parts[-1]}')
-[]
+        return res.json({'message':'Success', 'file-path': file_path})
+        # return res.redirect(f'/static/{inverted_file_path.parts[-1]}')
 
+@app.route("/download", methods=['GET'])
+async def process_download(request):
+
+    file_path = "./"+request.headers['file-path']
+
+    return await res.file(
+        file_path,
+        mime_type='audio/x-wav',
+        headers={
+            "Content-Disposition": 'attachment; filename="inverted.wav"',
+            'Content-Type': 'audio/x-wav'})
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=app.config.PORT)
