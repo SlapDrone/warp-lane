@@ -129,7 +129,10 @@ async def process_upload(request):
             Path(file_path),
             app.config.SERVE_DIR
         )
-        return res.json({'message':'Success', 'file-path': file_path})
+        return res.json({
+            'message':'Success',
+            'file-path': f'static/{inverted_file_path.parts[-1]}'
+        })
         # return res.redirect(f'/static/{inverted_file_path.parts[-1]}')
 
 @app.route("/download", methods=['GET'])
