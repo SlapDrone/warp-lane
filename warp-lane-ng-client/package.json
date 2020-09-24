@@ -11,8 +11,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pre-commit.sh",
-      "pre-push": "pre-push.sh"
+      "pre-commit": "bash pre-commit.sh",
+      "pre-push": "bash pre-push.sh"
     }
   },
   "private": true,
@@ -25,6 +25,8 @@
     "@angular/platform-browser": "~10.1.2",
     "@angular/platform-browser-dynamic": "~10.1.2",
     "@angular/router": "~10.1.2",
+    "@types/file-saver": "^2.0.1",
+    "file-saver": "^2.0.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
