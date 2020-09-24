@@ -23,8 +23,11 @@ export class FileUploadButtonComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public showSpinner = false;
+
   uploadFile($event: { target: { files: any[]; }; }): void {
     this.uploadedFile = $event.target.files[0];
+    this.showSpinner = true;
     console.log(this.uploadedFile);
     if (this.uploadedFile.type !== 'audio/x-wav'){
       // TODO SM: alerting code to be added.
@@ -56,6 +59,7 @@ export class FileUploadButtonComponent implements OnInit {
 
   private handleUploadError(fileName: string, data: any): void {
     console.error(`An error occurred processing the file ${fileName}.`);
+    this.showSpinner = false;
   }
 
   private handleDownloadSuccess(fileName: string, data: any): void {
@@ -63,10 +67,12 @@ export class FileUploadButtonComponent implements OnInit {
 
     const blob = new Blob([data], {type: 'audio/x-wav'});
     saveAs(blob, 'inverted.wav');
+    this.showSpinner = false;
   }
 
   private handleDownloadError(fileName: string, data: any): void {
     console.error(`An error occurred downloading file ${fileName}`);
     console.log(data);
+    this.showSpinner = false;
   }
 }
