@@ -13,11 +13,14 @@ from pathlib import Path
 from sanic import Sanic
 from sanic import response as res
 from sanic.log import logger
+from sanic_cors import CORS, cross_origin
 from werkzeug.utils import secure_filename
 
 from audio import invert_wav_file
 
 app = Sanic(__name__)
+CORS(app)
+
 # store user uploads here
 app.config.UPLOAD_DIR = Path('./received_files')
 # serve files from static folder
@@ -60,7 +63,7 @@ def valid_file_type(file_name,
      return False
 
 
-@app.route("/", methods=['GET'])
+@app.route("/", methods=['GET', 'OPTIONS'])
 def main(request):
     return res.text("I\'m a teapot", status=418)
 
