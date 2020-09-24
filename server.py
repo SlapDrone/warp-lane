@@ -47,8 +47,11 @@ async def write_file(path, body):
     f.close()
 
 
-def valid_file_size(file_body):
-    if len(file_body) < 10_485_760_000:
+def valid_file_size(file_body, max_size=(2**20)*500):
+    """
+    size < 500 MB
+    """
+    if len(file_body) < max_size:
         return True
     return False
 
@@ -96,7 +99,6 @@ async def process_upload(request):
     # upload_file = request.files.get('file')
     # if not upload_file:
     if len(request.body) == 0:
-    
         return res.redirect("/?error=no_file")
 
     # Clean up the filename in case it creates security risks
