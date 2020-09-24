@@ -14,7 +14,7 @@ import { FileConverterModule } from './file-converter/file-converter.module';
     BrowserModule,
     HttpClientModule,
 
-    AppRoutingModule, 
+    AppRoutingModule,
     FileConverterModule
   ],
   providers: [],

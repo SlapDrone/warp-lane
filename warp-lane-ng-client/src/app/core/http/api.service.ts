@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,31 +8,31 @@ import { Injectable } from '@angular/core';
 export class ApiService {
 
 
-  PORT = 8000
+  PORT = 8000;
 
   constructor(private http: HttpClient) { }
 
-  public uploadToServer(body: any, custom_headers: HttpHeaders = new HttpHeaders()){
-    console.log('Posting to server.')
-    let endpoint = "/upload"
-    
-    let headers = new HttpHeaders()
-    for(let key of custom_headers.keys()){
-      headers = headers.append(key, custom_headers.getAll(key))
+  public uploadToServer(body: any, customHeaders: HttpHeaders = new HttpHeaders()): Observable<any> {
+    console.log('Posting to server.');
+    const endpoint = '/upload';
+
+    let headers = new HttpHeaders();
+    for (const key of customHeaders.keys()){
+      headers = headers.append(key, customHeaders.getAll(key));
     }
-    let options = {headers: headers}
+    const options = {headers};
     return this.http.post(this.serverUrl + endpoint, body, options);
   }
 
-  public downloadFromServer(custom_headers: HttpHeaders = new HttpHeaders()){
-    console.log('Getting from server.')
-    let endpoint = "/download"
+  public downloadFromServer(customHeaders: HttpHeaders = new HttpHeaders()): Observable<any>{
+    console.log('Getting from server.');
+    const endpoint = '/download';
 
-    let headers = new HttpHeaders()
-    for(let key of custom_headers.keys()){
-      headers = headers.append(key, custom_headers.getAll(key))
+    let headers = new HttpHeaders();
+    for (const key of customHeaders.keys()){
+      headers = headers.append(key, customHeaders.getAll(key));
     }
-    let options = {headers: headers, responseType: 'arraybuffer' as 'arraybuffer'}
+    const options = {headers, responseType: 'arraybuffer' as 'arraybuffer'};
     return this.http.get(this.serverUrl + endpoint, options);
   }
 
