@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+static/*
+received_files/*
+
 # config
 config.yml
 

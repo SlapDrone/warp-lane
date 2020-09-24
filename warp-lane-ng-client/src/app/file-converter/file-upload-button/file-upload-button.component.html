@@ -1,0 +1,9 @@
+<input 
+    hidden 
+    type="file" 
+    #uploader
+    (change)="uploadFile($event)"
+/>
+<button (click)="uploader.click()">
+    Upload
+</button>
