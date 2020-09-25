@@ -9,15 +9,6 @@ export class KnobComponent implements OnInit {
 
   constructor(private renderer: Renderer2) { }
 
-  ngOnInit(): void {
-  }
-
-  @ViewChild('knob') knobElem: any;
-
-  dialValue: number = 0;
-
-  private temporaryTarget: HTMLImageElement;
-
   private get tempTargetRadius(): number {
     return this.temporaryTarget.width / 2;
   }
@@ -30,6 +21,15 @@ export class KnobComponent implements OnInit {
     return this.temporaryTarget.offsetLeft + this.tempTargetRadius;
   }
 
+  @ViewChild('knob') knobElem: any;
+
+  dialValue = 0;
+
+  private temporaryTarget: HTMLImageElement;
+
+  ngOnInit(): void {
+  }
+
   getDegrees(mouseX: number, mouseY: number): number {
     const radians = Math.atan2(mouseX - this.tempTargetCentreX, mouseY - this.tempTargetCentreY);
     const degrees = Math.round((radians * (180 / Math.PI) * -1) + 100);
@@ -40,29 +40,29 @@ export class KnobComponent implements OnInit {
     // TODO SM: Note this is only tested in Firefox, it's likely to break in all other browsers.
     this.temporaryTarget = $event.target;
     // Only work on left most click.
-    if($event.button === 0){
+    if ($event.button === 0){
       document.addEventListener('mousemove', this.onMouseMoveHandler, true);
       document.addEventListener('mouseup', this.onMouseUpHandler, true);
     }
-   
+
   }
 
   onMouseMoveHandler = ($event: any): void => {
     // Disable if the button is no longer pressed but the 'up' listener hasn't fired.
-    if($event.buttons > 0){
+    if ($event.buttons > 0){
       const mouseX = $event.x;
       const mouseY = $event.y;
-      let degrees = this.getDegrees(mouseX, mouseY);
-      this.dialValue = degrees > 0? degrees: 360 + degrees;
+      const degrees = this.getDegrees(mouseX, mouseY);
+      this.dialValue = degrees > 0 ? degrees : 360 + degrees;
       this.renderer.setStyle(this.knobElem.nativeElement, 'transform', `rotate(${degrees}deg)`);
     }else{
-      this.onMouseUpHandler()
+      this.onMouseUpHandler();
     }
   }
 
   onMouseUpHandler = (): void => {
-    document.removeEventListener('mousemove', this.onMouseMoveHandler, true)
-    document.removeEventListener('mouseup', this.onMouseUpHandler), true;
+    document.removeEventListener('mousemove', this.onMouseMoveHandler, true);
+    document.removeEventListener('mouseup', this.onMouseUpHandler, true);
   }
 
 }
