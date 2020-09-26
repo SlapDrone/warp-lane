@@ -3,19 +3,17 @@ server.py
 
 Receives an audio file over HTTP, warps it and sends it back
 """
-import os
 from datetime import datetime
 from pathlib import Path
-from typing import Union, List
+from typing import List
 
 import aiofiles
 from sanic import Sanic
 from sanic import response as res
 from sanic.log import logger
-from sanic_cors import CORS, cross_origin
-from werkzeug.utils import secure_filename
-
+from sanic_cors import CORS
 from src.audio import invert_wav_file
+from werkzeug.utils import secure_filename
 
 app = Sanic(__name__)
 CORS(app)
@@ -28,12 +26,12 @@ app.config.SERVE_DIR.mkdir(exist_ok=True)
 app.static("/static", str(app.config.SERVE_DIR))
 # restrict upload file formats
 app.config.ALLOWED_MEDIA_TYPES = [
-    #'application/pdf',
+    # 'application/pdf',
     "audio/wav",
     "audio/x-wav",
 ]
 app.config.ALLOWED_FILE_EXTS = [
-    #'pdf',
+    # 'pdf',
     "wav"
 ]
 # choose port
@@ -60,6 +58,9 @@ def valid_file_type(
 
 @app.route("/", methods=["GET", "OPTIONS"])
 def main(request):
+    """
+    Placeholder main page. Just returns some text.
+    """
     return res.text("I'm a teapot", status=418)
 
 
@@ -106,7 +107,9 @@ async def process_upload(request):
     # write the file to disk and redirect back to main
     # if not valid_file_type(upload_file.name, upload_file.type):
     if not valid_file_type(filename, file_content_type):
-        logger.info("Receive file with " f"name: {filename}, type: {file_content_type}")
+        logger.info(
+            "Receive file with " f"name: {filename}, type: {file_content_type}"
+        )
         return res.redirect("/?error=invalid_file_type")
     # elif not valid_file_size(upload_file.body):
     #     return res.redirect('/?error=invalid_file_size')
@@ -120,8 +123,10 @@ async def process_upload(request):
         # TODO: probably a nicer way to factor this keeping upload and download
         # separate! redirect to separate page to download file?
         # Invert the audio sample and write to a new file
-        inverted_file_path = invert_wav_file(Path(file_path), app.config.SERVE_DIR)
-        return res.json({"message": "Success", "file-path": file_path})
+        inverted_file_path = invert_wav_file(
+            Path(file_path), app.config.SERVE_DIR
+        )
+        return res.json({"message": "Success", "file-path": inverted_file_path})
         # return res.redirect(f'/static/{inverted_file_path.parts[-1]}')
 
 
