@@ -30,15 +30,15 @@ repos:
     -   id: run-tests
         name: run tests
         entry: pytest warp-lane-server/tests
-        stages: [push]
+        #stages: [push]
         language: python
         additional_dependencies: [pre-commit, pytest]
         always_run: true
         pass_filenames: false
     -   id: run-sphinx
         name: run sphinx
-        entry: sphinx-apidoc docs .
-        stages: [push]
+        entry: sphinx-apidoc -o docs .
+        #stages: [push]
         language: python
         additional_dependencies: [sphinx]
         always_run: true
