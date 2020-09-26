@@ -76,4 +76,8 @@ def test_dummy3(db, res, x1):
     assert db[x1] == res
 
 
+def test_hng():
+    assert True
+
+
 # --
