@@ -11,20 +11,22 @@ repos:
     rev: v2.1.0
     hooks:
     - id: flake8
--   repo: local
-    hooks:
-      - id: pylint
-        name: pylint
-        entry: python3 -m pylint.__main__
-        language: system
-        types: [python]
--   repo: git://github.com/luismayta/pre-commit-mypy
-    rev: 0.1.1  # Use the sha you want to point at
+-   repo: https://github.com/pre-commit/mirrors-mypy
+    rev: ''  # Use the sha / tag you want to point at
     hooks:
     -   id: mypy
-        args:
-        - --ignore-missing-imports
+        args: [--no-strict-optional, --ignore-missing-imports]
 -   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v1.2.3
     hooks:
     - id: flake8
+    # local stuff
+-   repo: local
+    hooks:
+    -   id: run-tests
+        name: run tests
+        entry: pytest warp-lane-server/tests
+        language: python
+        additional_dependencies: [pre-commit, pytest]
+        always_run: true
+        pass_filenames: false
