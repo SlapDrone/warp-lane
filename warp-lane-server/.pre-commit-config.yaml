@@ -26,6 +26,7 @@ repos:
     -   id: run-tests
         name: run tests
         entry: pytest warp-lane-server/tests
+        stages: [push]
         language: python
         additional_dependencies: [pre-commit, pytest]
         always_run: true
