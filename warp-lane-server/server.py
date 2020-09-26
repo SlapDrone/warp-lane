@@ -126,7 +126,9 @@ async def process_upload(request):
         inverted_file_path = invert_wav_file(
             Path(file_path), app.config.SERVE_DIR
         )
-        return res.json({"message": "Success", "file-path": inverted_file_path})
+        return res.json(
+            {"message": "Success", "file-path": str(inverted_file_path)}
+        )
         # return res.redirect(f'/static/{inverted_file_path.parts[-1]}')
 
 
