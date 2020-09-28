@@ -12,7 +12,7 @@ from sanic import Sanic
 from sanic import response as res
 from sanic.log import logger
 from sanic_cors import CORS
-from src.audio import invert_wav_file
+from src.audio import capture_audio_and_save  # , invert_wav_file
 from werkzeug.utils import secure_filename
 
 app = Sanic(__name__)
@@ -123,11 +123,14 @@ async def process_upload(request):
         # TODO: probably a nicer way to factor this keeping upload and download
         # separate! redirect to separate page to download file?
         # Invert the audio sample and write to a new file
-        inverted_file_path = invert_wav_file(
+        # inverted_file_path = invert_wav_file(
+        #    Path(file_path), app.config.SERVE_DIR
+        # )
+        modified_audio_path = capture_audio_and_save(
             Path(file_path), app.config.SERVE_DIR
         )
         return res.json(
-            {"message": "Success", "file-path": str(inverted_file_path)}
+            {"message": "Success", "file-path": str(modified_audio_path)}
         )
         # return res.redirect(f'/static/{inverted_file_path.parts[-1]}')
 
