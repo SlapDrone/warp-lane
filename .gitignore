@@ -105,7 +105,7 @@ ENV/
 #/output/
 
 # config yaml
-config.yml
+#config.yml
 
 # docker compose (permit multiple containers w/ different ports etc)
 #docker-compose.yml

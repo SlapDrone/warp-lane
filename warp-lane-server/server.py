@@ -12,7 +12,7 @@ from sanic import Sanic
 from sanic import response as res
 from sanic.log import logger
 from sanic_cors import CORS
-from src.audio import capture_audio_and_save  # , invert_wav_file
+from warplane.audio import capture_audio_and_save  # , invert_wav_file
 from werkzeug.utils import secure_filename
 
 app = Sanic(__name__)
@@ -132,19 +132,17 @@ async def process_upload(request):
         return res.json(
             {"message": "Success", "file-path": str(modified_audio_path)}
         )
-        # return res.redirect(f'/static/{inverted_file_path.parts[-1]}')
 
 
 @app.route("/download", methods=["GET"])
 async def process_download(request):
-
     file_path = "./" + request.headers["file-path"]
-
     return await res.file(
         file_path,
         mime_type="audio/x-wav",
         headers={
-            "Content-Disposition": 'attachment; filename="inverted.wav"',
+            "Content-Disposition": "attachment; "
+            f"filename={file_path.split('/')[-1]}",
             "Content-Type": "audio/x-wav",
         },
     )

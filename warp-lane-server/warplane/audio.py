@@ -13,13 +13,14 @@ from typing import List, Optional, Tuple, Union
 import numpy as np
 import soundcard as sc
 import soundfile
+import warplane.config as cfg
 from sanic.log import logger
 from scipy.io import wavfile
 
 lock = RLock()
 executor = ThreadPoolExecutor()
-komplete_input = sc.get_microphone("Komplete")
-komplete_output = sc.get_speaker("Komplete")
+komplete_input = sc.get_microphone(cfg.interface_input_id)  # type: ignore
+komplete_output = sc.get_speaker(cfg.interface_output_id)  # type: ignore
 
 
 def read_wav_file(
