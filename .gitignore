@@ -99,6 +99,11 @@ ENV/
 # Pycharm
 .idea
 
+warp-lane-server/received_files/*
+warp-lane-server/static/*
+.vscode/settings.json
+
+
 # Cookiecutter folders
 #/data/
 #/figures/

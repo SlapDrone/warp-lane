@@ -32,7 +32,7 @@ export class ApiService {
     for (const key of customHeaders.keys()){
       headers = headers.append(key, customHeaders.getAll(key));
     }
-    const options = {headers, responseType: 'arraybuffer' as 'arraybuffer'};
+    const options = {headers, observe: 'response' as 'response', responseType: 'arraybuffer' as 'arraybuffer'};
     return this.http.get(this.serverUrl + endpoint, options);
   }
 

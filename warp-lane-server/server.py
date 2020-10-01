@@ -12,7 +12,12 @@ from sanic import Sanic
 from sanic import response as res
 from sanic.log import logger
 from sanic_cors import CORS
-from warplane.audio import capture_audio_and_save  # , invert_wav_file
+
+try:  # TODO SM: Received "ModuleNotFoundError: No module named 'soundcard'."
+    from warplane.audio import capture_audio_and_save  # , invert_wav_file
+except ModuleNotFoundError:
+    from warplane.audio_mock import invert_wav_file as capture_audio_and_save
+
 from werkzeug.utils import secure_filename
 
 app = Sanic(__name__)
@@ -61,7 +66,9 @@ def main(request):
     """
     Placeholder main page. Just returns some text.
     """
-    return res.text("I'm a teapot", status=418)
+    return res.text(
+        "I'm a teapot", status=200
+    )
 
 
 @app.route("/upload", methods=["POST", "GET"])
@@ -141,8 +148,10 @@ async def process_download(request):
         file_path,
         mime_type="audio/x-wav",
         headers={
-            "Content-Disposition": "attachment; "
-            f"filename={file_path.split('/')[-1]}",
+            "Access-Control-Allow-Headers": "file-name",
+            "Access-Control-Expose-Headers": "file-name",
+            "Content-Disposition": "attachment; ",
+            "file-name": f"{file_path.split('/')[-1]}",
             "Content-Type": "audio/x-wav",
         },
     )
