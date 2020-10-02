@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'wl-knob',
@@ -20,6 +20,8 @@ export class KnobComponent implements OnInit {
   private get tempTargetCentreX(): number {
     return this.temporaryTarget.offsetLeft + this.tempTargetRadius;
   }
+
+  @Input() controlName: string;
 
   @ViewChild('knob') knobElem: any;
 
