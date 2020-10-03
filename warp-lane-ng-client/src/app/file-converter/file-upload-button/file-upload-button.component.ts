@@ -48,7 +48,6 @@ export class FileUploadButtonComponent implements OnInit {
   private handleUploadSuccess(fileName: string, data: any): void {
 
     console.log(`Response received for fileName ${fileName}.`);
-    console.log(data);
     let headers = new HttpHeaders();
     headers = headers.append('file-path', data['file-path']);
     this.apiService.downloadFromServer(headers).subscribe(
@@ -64,9 +63,10 @@ export class FileUploadButtonComponent implements OnInit {
 
   private handleDownloadSuccess(fileName: string, data: any): void {
     console.log(`Successfully downloaded ${fileName}, response: ${data}`);
-
-    const blob = new Blob([data], {type: 'audio/x-wav'});
-    saveAs(blob, 'inverted.wav');
+    fileName = data.headers.get('file-name');
+    // headerFileName = data.
+    const blob = new Blob([data.body], {type: 'audio/x-wav'});
+    saveAs(blob, fileName);
     this.showSpinner = false;
   }
 
