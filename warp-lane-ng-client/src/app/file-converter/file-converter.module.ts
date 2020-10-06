@@ -4,11 +4,15 @@ import { FileUploadButtonComponent } from './file-upload-button/file-upload-butt
 import { FileConverterDashboardComponent } from './file-converter-dashboard/file-converter-dashboard.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { WlCoreModule } from '../core/wl-core.module';
+import { KnobComponent } from './knob/knob.component';
 
 
 
 @NgModule({
-  declarations: [FileUploadButtonComponent, FileConverterDashboardComponent],
+  declarations: [
+    FileUploadButtonComponent, 
+    FileConverterDashboardComponent, 
+    KnobComponent],
   imports: [
     CommonModule,
     WlCoreModule,

@@ -2,6 +2,8 @@ import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from 'src/app/core/http/api.service';
 import { saveAs } from 'file-saver';
+import { TrackControllerService } from '../track-control-pane/track-control-pane.service';
+import { IUploadedFile } from '../IUploadedFile';
 
 @Component({
   selector: 'wl-file-upload-button',
@@ -10,31 +12,26 @@ import { saveAs } from 'file-saver';
 })
 export class FileUploadButtonComponent implements OnInit {
 
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private apiService: ApiService, 
+    private trackController: TrackControllerService) { 
 
-  private uploadedFile: {
-    lastModified: number,
-    name: string,
-    size: number,
-    type: string,
-    webkitRelativePath: string
-  };
-
+  }
   public showSpinner = false;
 
   ngOnInit(): void {
   }
 
   uploadFile($event: { target: { files: any[]; }; }): void {
-    this.uploadedFile = $event.target.files[0];
+    const file = <IUploadedFile>$event.target.files[0];
     this.showSpinner = true;
-    console.log(this.uploadedFile);
-    if (this.uploadedFile.type !== 'audio/x-wav'){
+    if (file.type !== 'audio/x-wav'){
       // TODO SM: alerting code to be added.
       window.alert('Invalid file type.');
-      this.uploadedFile = undefined;
     }
     else{
+      this.trackController.originalFile = file;
+
       let headers = new HttpHeaders();
       headers = headers.append('file-name', this.uploadedFile.name);
       this.apiService.uploadToServer(this.uploadedFile, headers)

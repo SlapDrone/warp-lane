@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { TrackControllerService } from '../track-control-pane/track-control-pane.service';
 
 @Component({
   selector: 'wl-knob',
@@ -7,7 +8,11 @@ import { Component, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 })
 export class KnobComponent implements OnInit {
 
-  constructor(private renderer: Renderer2) { }
+  constructor(
+    private renderer: Renderer2, 
+    private trackController: TrackControllerService) { 
+
+  }
 
   private get tempTargetRadius(): number {
     return this.temporaryTarget.width / 2;
@@ -65,6 +70,7 @@ export class KnobComponent implements OnInit {
   onMouseUpHandler = (): void => {
     document.removeEventListener('mousemove', this.onMouseMoveHandler, true);
     document.removeEventListener('mouseup', this.onMouseUpHandler, true);
+    this.trackController.setControl(this.controlName, this.dialValue);
   }
 
 }
