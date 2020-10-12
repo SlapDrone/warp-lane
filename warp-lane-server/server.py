@@ -15,7 +15,7 @@ from sanic_cors import CORS
 
 try:  # TODO SM: Received "ModuleNotFoundError: No module named 'soundcard'."
     from warplane.audio import capture_audio_and_save  # , invert_wav_file
-except ModuleNotFoundError:
+except (ModuleNotFoundError, AssertionError): # Assertion error config.yml missing
     from warplane.audio_mock import invert_wav_file as capture_audio_and_save
 
 from werkzeug.utils import secure_filename

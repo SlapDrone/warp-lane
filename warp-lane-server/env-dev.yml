@@ -1,0 +1,72 @@
+name: warplane-dev
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.8
+  - tensorflow-gpu
+  - matplotlib
+  - seaborn
+  - dask
+  - dask-image
+  - cython
+  - click
+  - dask-ml
+  - numpy
+  - pandas
+  - scikit-learn >= 0.22
+  - sqlalchemy
+  - sqlite
+  - ipykernel
+  - nb_conda_kernels
+  - flake8
+  - zarr
+  - einops
+  - regex
+  - umap-learn
+  - imbalanced-learn
+  - plotly
+  - cufflinks-py
+  - dash
+  #==0.21.0
+  - dash-core-components
+  #==0.22.1
+  - dash-html-components
+  #==0.10.0
+  - dash-renderer
+  - dash-daq
+  - pymc3
+  - dnspython
+  - aiohttp
+  - aiofiles
+  - pytest-mock
+  - python-dotenv
+  - sanic
+  - pydub
+  - librosa
+  - h2==3.2.0
+  - black
+  - mypy
+  - isort
+  - pre-commit
+  - pyaudio
+  - sphinx
+  - nbsphinx
+  - python-sounddevice
+  - pip
+  - pip:
+    - openpyxl
+    - simple-salesforce
+    - cached-property
+    - protego
+    - keras-tuner
+    - cryptography==2.8
+    - dash-auth
+    - hdbscan
+    - nest-asyncio
+    - timbermafia
+    - pyaudioanalysis
+    - aiotask_context
+    - sanic-cors
+    - soundcard
+    - sphinx_rtd_theme

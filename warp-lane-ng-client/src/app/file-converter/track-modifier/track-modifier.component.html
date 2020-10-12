@@ -1,0 +1,16 @@
+<div class="control-pane">
+    <wl-knob controlName="placeholder-control-1"></wl-knob>
+    <wl-knob controlName="placeholder-control-2"></wl-knob>
+    <wl-knob controlName="placeholder-control-3"></wl-knob>
+</div>
+
+<wl-bottom-bar>
+    <div class="bottom-button-bar-left-group">
+        <button class="bottom-button" routerLink="../">Back</button> 
+        <button class="bottom-button delete-button">Delete</button>  
+    </div>
+    <div class="bottom-button-bar-right-group">
+        <button *ngIf="uploadResponse" class="bottom-button save-button" (click)="saveTrack()">Save</button>
+        <button class="bottom-button commit-button" (click)="submitTrack()">Submit</button>
+    </div>
+</wl-bottom-bar>

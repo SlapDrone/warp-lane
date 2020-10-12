@@ -1,0 +1,26 @@
+<div class="track-list-container">
+    <div 
+        class="track-list-item" 
+        *ngFor="let track of trackList"
+        routerLink="/file-converter/track-modifier"
+        (click)="trackSelect(track)"
+    >
+        <span class="track-list-item-text">{{track.name}}</span><div class="list-arrow">></div>
+    </div>
+    <div wlDropArea [dropFunction]="uploadFile" class="drop-zone" id="dropzone">
+        <span>Drag + Drop File Here.</span>
+    </div>
+</div>
+<input 
+    hidden 
+    type="file" 
+    #uploader
+    (change)="uploadFile($event)"
+/>
+<wl-bottom-bar>
+    <div class="bottom-button-bar-left-group">
+        <button class="bottom-button" (click)="uploader.click()">
+            Upload
+        </button>
+    </div>
+</wl-bottom-bar>

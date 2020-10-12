@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { KnobComponent } from './widgets/knob/knob.component';
-
+import { DropAreaDirective } from './directives/drop-area/drop-area.directive';
 
 
 @NgModule({
-  declarations: [KnobComponent],
-  exports: [KnobComponent],
+  declarations: [DropAreaDirective],
+  exports: [DropAreaDirective],
   imports: [
     CommonModule
   ]
