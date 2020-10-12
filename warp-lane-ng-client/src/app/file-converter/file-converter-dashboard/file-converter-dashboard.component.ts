@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'wl-file-converter-dashboard',
@@ -18,8 +18,7 @@ export class FileConverterDashboardComponent implements OnInit {
   The site should be set up as a PWA so that in browser mode can run offline.
   */
   constructor() { }
-
-  ngOnInit(): void {
-  }
+  
+  ngOnInit(){}
 
 }

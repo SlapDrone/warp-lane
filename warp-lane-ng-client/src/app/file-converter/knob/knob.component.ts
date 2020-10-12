@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { TrackControllerService } from '../track-control-pane/track-control-pane.service';
+import { TrackControllerService } from '../track-controller.service';
 
 @Component({
   selector: 'wl-knob',

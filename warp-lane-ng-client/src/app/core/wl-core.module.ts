@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { DropAreaDirective } from './directives/drop-area/drop-area.directive';
 
 
 @NgModule({
-  declarations: [],
-  exports: [],
+  declarations: [DropAreaDirective],
+  exports: [DropAreaDirective],
   imports: [
     CommonModule
   ]

@@ -1,15 +1,26 @@
 import { Injectable } from '@angular/core';
-import { IUploadedFile } from '../IUploadedFile';
+import { EntityService } from '../core/entity.service';
+import { IUploadedFile } from './IUploadedFile';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TrackControllerService {
 
-  constructor() { }
+  constructor(private entityService: EntityService) { }
 
   private controlSettings: Map<string, any> = new Map();
   public trackIdentifier: string;
+
+  private _selectedTrack: any;
+  public get selectedTrack(): any{
+    return this._selectedTrack;
+  }
+
+  public set selectedTrack(val: any){
+    this._selectedTrack = val;
+    this.entityService.setCurrentEntity(val);
+  }
 
   public originalFile: IUploadedFile;
   
