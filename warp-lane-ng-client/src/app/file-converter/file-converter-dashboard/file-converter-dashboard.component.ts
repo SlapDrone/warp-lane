@@ -18,7 +18,7 @@ export class FileConverterDashboardComponent implements OnInit {
   The site should be set up as a PWA so that in browser mode can run offline.
   */
   constructor() { }
-  
+
   ngOnInit(){}
 
 }

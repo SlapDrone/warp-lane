@@ -9,7 +9,7 @@ const routes: Routes = [
   {
     path: 'file-converter',
     component: FileConverterDashboardComponent,
-    children:[
+    children: [
       {
         path: '',
         component: MyTrackSearchComponent

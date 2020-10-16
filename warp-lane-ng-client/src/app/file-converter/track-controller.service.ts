@@ -23,7 +23,7 @@ export class TrackControllerService {
   }
 
   public originalFile: IUploadedFile;
-  
+
   public setControl(name: string, value: any): void {
     this.controlSettings.set(name, value);
   }

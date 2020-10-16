@@ -11,7 +11,7 @@ import { TrackControllerService } from '../track-controller.service';
 export class TrackModifierComponent implements OnInit {
 
   constructor(
-    private apiService: ApiService, 
+    private apiService: ApiService,
     private trackController: TrackControllerService) { }
 
   public uploadResponse: any;
@@ -33,7 +33,7 @@ export class TrackModifierComponent implements OnInit {
 
     console.log(`Response received for fileName ${fileName}.`);
     this.uploadResponse = data;
-    
+
   }
 
   private handleUploadError(fileName: string, data: any): void {

@@ -13,8 +13,8 @@ import { TrackControllerService } from '../track-controller.service';
 export class FileUploadButtonComponent implements OnInit {
 
   constructor(
-    private apiService: ApiService, 
-    private trackController: TrackControllerService) { 
+    private apiService: ApiService,
+    private trackController: TrackControllerService) {
 
   }
   public showSpinner = false;
@@ -23,7 +23,12 @@ export class FileUploadButtonComponent implements OnInit {
   }
 
   uploadFile($event: { target: { files: any[]; }; }): void {
-    const file = <IUploadedFile>$event.target.files[0];
+    let file;
+    if ($event){
+      file = ($event.target.files[0] as IUploadedFile);
+    }else{
+      file = ((document.getElementById('uploader') as any).files[0] as IUploadedFile);
+    }
     this.showSpinner = true;
     if (file.type !== 'audio/x-wav'){
       // TODO SM: alerting code to be added.

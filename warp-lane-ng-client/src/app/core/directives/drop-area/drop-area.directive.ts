@@ -11,28 +11,28 @@ export class DropAreaDirective {
   @Input('dragOverClass') dragOverClass: string;
 
   @HostBinding('class.drop-hover')
-  isDragOver: boolean = false;
+  isDragOver = false;
 
-  @HostListener('drop',['$event']) 
-  onDrop (event: any) {
+  @HostListener('drop', ['$event'])
+  onDrop(event: any) {
     this.dropFunction(event);
     this.cancelEvent(event);
-    this.endDragTransaction()
+    this.endDragTransaction();
   }
 
-  @HostListener('dragenter',['$event']) 
-  onDragEnter = (event:any) => {
+  @HostListener('dragenter', ['$event'])
+  onDragEnter = (event: any) => {
     this.cancelEvent(event);
   }
 
-  @HostListener('dragleave',['$event']) 
-  onDragLeave = (event:any) => {
+  @HostListener('dragleave', ['$event'])
+  onDragLeave = (event: any) => {
     this.cancelEvent(event);
-    this.endDragTransaction()
+    this.endDragTransaction();
   }
 
-  @HostListener('dragover',['$event']) 
-  onDragOver = (event:any) => {
+  @HostListener('dragover', ['$event'])
+  onDragOver = (event: any) => {
     this.cancelEvent(event);
     this.isDragOver = true;
   }
@@ -43,7 +43,7 @@ export class DropAreaDirective {
   }
 
   endDragTransaction = () => {
-    this.isDragOver = false
+    this.isDragOver = false;
   }
 
 

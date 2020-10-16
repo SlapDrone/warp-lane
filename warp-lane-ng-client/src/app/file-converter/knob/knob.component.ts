@@ -9,8 +9,8 @@ import { TrackControllerService } from '../track-controller.service';
 export class KnobComponent implements OnInit {
 
   constructor(
-    private renderer: Renderer2, 
-    private trackController: TrackControllerService) { 
+    private renderer: Renderer2,
+    private trackController: TrackControllerService) {
 
   }
 
