@@ -11,7 +11,7 @@ import { TrackControllerService } from '../track-controller.service';
 export class TrackModifierComponent implements OnInit {
 
   constructor(
-    private apiService: ApiService, 
+    private apiService: ApiService,
     private trackController: TrackControllerService) { }
 
   public uploadResponse: any;
@@ -19,7 +19,7 @@ export class TrackModifierComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submitTrack(){
+  submitTrack(): void{
     let headers = new HttpHeaders();
     headers = headers.append('file-name', this.trackController.originalFile.name);
     this.apiService.uploadToServer(this.trackController.originalFile, headers)
@@ -33,14 +33,14 @@ export class TrackModifierComponent implements OnInit {
 
     console.log(`Response received for fileName ${fileName}.`);
     this.uploadResponse = data;
-    
+
   }
 
   private handleUploadError(fileName: string, data: any): void {
     console.error(`An error occurred processing the file ${fileName}.`);
   }
 
-  saveTrack(){
+  saveTrack(): void{
     let headers = new HttpHeaders();
     headers = headers.append('file-path', this.uploadResponse['file-path']);
     this.apiService.downloadFromServer(headers).subscribe(

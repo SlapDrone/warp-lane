@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'wl-file-converter-dashboard',
   templateUrl: './file-converter-dashboard.component.html',
   styleUrls: ['./file-converter-dashboard.component.sass']
 })
-export class FileConverterDashboardComponent implements OnInit {
+export class FileConverterDashboardComponent {
   /*
   This is the dashboard for file converter tasks. The landing screen will show a widget containing the list of files
   being worked on. Server side we store the configuration file in json format that the user has set up but don't store
@@ -18,7 +18,6 @@ export class FileConverterDashboardComponent implements OnInit {
   The site should be set up as a PWA so that in browser mode can run offline.
   */
   constructor() { }
-  
-  ngOnInit(){}
+
 
 }

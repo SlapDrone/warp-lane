@@ -10,18 +10,18 @@ export class TopBarComponent implements OnInit {
 
   constructor(private entityService: EntityService) { }
 
+  entityName: string;
+
   ngOnInit(): void {
     this.entityService.currentEntity.subscribe(
       entity => {
-        if(entity && entity.name){
+        if (entity && entity.name){
           this.entityName = entity.name;
         } else {
           this.entityName = undefined;
         }
       }
-    )
+    );
   }
-
-  entityName: string;
 
 }

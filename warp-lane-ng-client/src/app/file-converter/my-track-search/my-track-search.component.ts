@@ -23,28 +23,28 @@ export class MyTrackSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.entityService.clear();
-    this.entityService.setCurrentEntity({name: "Select a track to begin modification."})
+    this.entityService.setCurrentEntity({name: 'Select a track to begin modification.'});
   }
 
-  trackSelect(track: any){
+  trackSelect(track: any): void{
     this.trackController.selectedTrack = track;
   }
 
   public get noTracks(): boolean {
-    return !this.trackList.length
+    return !this.trackList.length;
   }
 
   uploadFile = (event: { dataTransfer: { files: any[]; }; }): void => {
-    for(const file of <IUploadedFile[]>event.dataTransfer.files){
+    for (const file of event.dataTransfer.files as IUploadedFile[]){
       // const file = <IUploadedFile>event.dataTransfer.files[0];
-      //this.showSpinner = true;
+      // this.showSpinner = true;
       if (file.type !== 'audio/x-wav'){
         // TODO SM: alerting code to be added.
         window.alert('Invalid file type.');
       }
       else{
         this.trackController.originalFile = file;
-        this.trackList.push({name: this.trackController.originalFile.name})
+        this.trackList.push({name: this.trackController.originalFile.name});
       }
 //
     //  let headers = new HttpHeaders();
@@ -54,7 +54,7 @@ export class MyTrackSearchComponent implements OnInit {
     //      success => this.handleUploadSuccess(this.trackController.originalFile.name, success),
     //      error => this.handleUploadError(this.trackController.originalFile.name, error)
     //    );
-    //}
+    // }
     }
   }
 }

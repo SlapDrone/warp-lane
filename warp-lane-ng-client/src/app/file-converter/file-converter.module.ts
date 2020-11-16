@@ -16,8 +16,8 @@ import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
 
 @NgModule({
   declarations: [
-    FileUploadButtonComponent, 
-    FileConverterDashboardComponent, 
+    FileUploadButtonComponent,
+    FileConverterDashboardComponent,
     KnobComponent, MyTrackSearchComponent, TrackModifierComponent, TopBarComponent, BottomBarComponent],
   imports: [
     BrowserModule,
