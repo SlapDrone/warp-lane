@@ -23,7 +23,12 @@ export class FileUploadButtonComponent implements OnInit {
   }
 
   uploadFile($event: { target: { files: any[]; }; }): void {
-    const file = $event.target.files[0] as IUploadedFile;
+    let file;
+    if ($event){
+      file = ($event.target.files[0] as IUploadedFile);
+    }else{
+      file = ((document.getElementById('uploader') as any).files[0] as IUploadedFile);
+    }
     this.showSpinner = true;
     if (file.type !== 'audio/x-wav'){
       // TODO SM: alerting code to be added.
