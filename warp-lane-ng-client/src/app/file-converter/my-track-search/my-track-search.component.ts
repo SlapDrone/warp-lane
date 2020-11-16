@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EntityService } from 'src/app/core/entity.service';
+import { UserDetailsService } from 'src/app/user/user-details.service';
 import { ITrackDetails } from '../ITrackDetails';
 import { IUploadedFile } from '../IUploadedFile';
 import { TrackControllerService } from '../track-controller.service';
@@ -11,17 +12,26 @@ import { TrackControllerService } from '../track-controller.service';
 })
 export class MyTrackSearchComponent implements OnInit {
 
-  constructor(private trackController: TrackControllerService,
-    private entityService: EntityService) { }
+  constructor(
+    private trackController: TrackControllerService,
+    private entityService: EntityService,
+    private userService: UserDetailsService) { }
 
-  public trackList: (ITrackDetails)[] = [];
+  public get trackList(): ITrackDetails[]{
+    return this.userService.trackCollection;
+  }
 
   ngOnInit(): void {
     this.entityService.clear();
+    this.entityService.setCurrentEntity({name: "Select a track to begin modification."})
   }
 
   trackSelect(track: any){
     this.trackController.selectedTrack = track;
+  }
+
+  public get noTracks(): boolean {
+    return !this.trackList.length
   }
 
   uploadFile = (event: { dataTransfer: { files: any[]; }; }): void => {

@@ -1,14 +1,26 @@
 <div class="track-list-container">
-    <div 
-        class="track-list-item" 
-        *ngFor="let track of trackList"
-        routerLink="/file-converter/track-modifier"
-        (click)="trackSelect(track)"
-    >
-        <span class="track-list-item-text">{{track.name}}</span><div class="list-arrow">></div>
+    <div class="track-list" *ngIf="trackList.length">
+        <div class="track-list-section">
+            <div 
+                class="track-list-item" 
+                *ngFor="let track of trackList"
+                routerLink="/file-converter/track-modifier"
+                (click)="trackSelect(track)"
+            >
+                <span class="track-list-item-text">{{track.name}}</span><img class="list-arrow" src="assets/chevron_two.svg">
+            </div>
+        </div>
+        <div wlDropArea [dropFunction]="uploadFile" class="drop-zone" id="dropzone">
+            <span>
+                Drag and drop files here or upload using the upload button.
+            </span>
+        </div>
     </div>
-    <div wlDropArea [dropFunction]="uploadFile" class="drop-zone" id="dropzone">
-        <span>Drag + Drop File Here.</span>
+    <div wlDropArea *ngIf="!trackList.length" [dropFunction]="uploadFile" class="drop-zone drop-zone-only" id="dropzone">
+        <span>
+            No files uploaded.
+            Drag and drop files here or upload using the upload button.
+        </span>
     </div>
 </div>
 <input 

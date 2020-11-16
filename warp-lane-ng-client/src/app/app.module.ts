@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FileConverterModule } from './file-converter/file-converter.module';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -15,9 +16,9 @@ import { FileConverterModule } from './file-converter/file-converter.module';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-
     AppRoutingModule,
-    FileConverterModule
+    FileConverterModule,
+    UserModule
   ],
   providers: [],
   bootstrap: [AppComponent]
