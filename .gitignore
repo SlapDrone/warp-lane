@@ -114,3 +114,13 @@ warp-lane-server/static/*
 
 # docker compose (permit multiple containers w/ different ports etc)
 #docker-compose.yml
+
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+.vscode/launch.json
