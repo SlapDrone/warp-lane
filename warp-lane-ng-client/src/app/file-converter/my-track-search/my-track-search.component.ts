@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { EntityService } from 'src/app/core/entity.service';
 import { UserDetailsService } from 'src/app/user/user-details.service';
 import { ITrackDetails } from '../ITrackDetails';
@@ -17,6 +17,8 @@ export class MyTrackSearchComponent implements OnInit {
     private entityService: EntityService,
     private userService: UserDetailsService) { }
 
+  @ViewChild('uploader') uploaderButton;
+
   public get trackList(): ITrackDetails[]{
     return this.userService.trackCollection;
   }
@@ -30,27 +32,28 @@ export class MyTrackSearchComponent implements OnInit {
     this.trackController.selectedTrack = track;
   }
 
+  addFile(file): void{
+    if (file.type !== 'audio/x-wav' && file.type !== 'audio/wav'){
+      // TODO SM: alerting code to be added.
+      window.alert('Invalid file type.');
+    }
+    else{
+      this.trackController.originalFile = file;
+      this.trackList.push({name: this.trackController.originalFile.name})
+    }
+  }
+
   uploadFile = (event: { dataTransfer: { files: any[]; }; }): void => {
-    for(const file of <IUploadedFile[]>event.dataTransfer.files){
-      // const file = <IUploadedFile>event.dataTransfer.files[0];
-      //this.showSpinner = true;
-      if (file.type !== 'audio/x-wav'){
-        // TODO SM: alerting code to be added.
-        window.alert('Invalid file type.');
+
+    if (event.dataTransfer){
+      for(const file of <IUploadedFile[]>event.dataTransfer.files){
+        // const file = <IUploadedFile>event.dataTransfer.files[0];
+        //this.showSpinner = true;
+        this.addFile(file)
       }
-      else{
-        this.trackController.originalFile = file;
-        this.trackList.push({name: this.trackController.originalFile.name})
-      }
-//
-    //  let headers = new HttpHeaders();
-    //  headers = headers.append('file-name', this.trackController.originalFile.name);
-    //  this.apiService.uploadToServer(this.trackController.originalFile, headers)
-    //    .subscribe(
-    //      success => this.handleUploadSuccess(this.trackController.originalFile.name, success),
-    //      error => this.handleUploadError(this.trackController.originalFile.name, error)
-    //    );
-    //}
+    }else{
+      let file = (this.uploaderButton.nativeElement.files[0] as IUploadedFile);
+      this.addFile(file)
     }
   }
 }

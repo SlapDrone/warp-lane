@@ -23,16 +23,17 @@
         </span>
     </div>
 </div>
-<input 
-    hidden 
-    type="file" 
-    #uploader
-    (change)="uploadFile($event)"
-/>
+
 <wl-bottom-bar>
     <div class="bottom-button-bar-left-group">
         <button class="bottom-button" (click)="uploader.click()">
             Upload
         </button>
+        <input 
+            hidden
+            type="file" 
+            #uploader
+            (change)="uploadFile($event)"
+        />
     </div>
 </wl-bottom-bar>
