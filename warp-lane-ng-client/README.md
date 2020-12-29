@@ -2,11 +2,15 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.2.
 
-To run the commands below you first need to install node.js on your system and then install the packages required for this angular app by calling "npm install" from this directory. Once packages are installed add angular to your path such that the generated instructions below work. The directory to add to your path relative to this directory is "node_modules/@angular/cli/bin" .
+To run the commands below you first need to install node.js on your system and then install the packages required for this angular app by calling "npm install" from this directory. 
 
 On Arch Linux, `npm` is available via pacman:
 
 `sudo pacman -S npm`
+
+Once packages are installed add angular to your path such that the generated instructions below work. The directory to add to your path relative to this directory is "node_modules/@angular/cli/bin" .
+
+`export PATH='/path/to/warp-lane/warp-lane-ng-client/node_modules/@angular/cli/bin':$PATH`
 
 ## Development server
 
