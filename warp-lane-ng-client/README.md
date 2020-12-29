@@ -4,6 +4,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 To run the commands below you first need to install node.js on your system and then install the packages required for this angular app by calling "npm install" from this directory. Once packages are installed add angular to your path such that the generated instructions below work. The directory to add to your path relative to this directory is "node_modules/@angular/cli/bin" .
 
+On Arch Linux, `npm` is available via pacman:
+
+`sudo pacman -S npm`
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
