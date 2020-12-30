@@ -4,7 +4,10 @@ channels:
   - conda-forge
 dependencies:
   - python=3.8
+  - cudatoolkit
+  - cudnn
   - tensorflow-gpu
+  - tensorflow-probability
   - matplotlib
   - seaborn
   - dask
@@ -56,7 +59,9 @@ dependencies:
   - pip
   - pip:
     - openpyxl
-    - simple-salesforce
+    - crepe
+    - ddsp
+    - gin-config
     - cached-property
     - protego
     - keras-tuner
@@ -70,3 +75,4 @@ dependencies:
     - sanic-cors
     - soundcard
     - sphinx_rtd_theme
+    - llvmlite==0.32.1

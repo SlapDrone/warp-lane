@@ -9,6 +9,15 @@
     flex-direction: column
     overflow-y: hidden
 
+.track-list
+    min-height: 200px
+    border-radius: 10px
+    display: flex
+    flex-direction: column
+
+.track-list-section
+    flex: 1
+
 .track-list-container
     margin: 10px 20px 10px 20px
     flex:1
@@ -22,21 +31,22 @@
     display: flex
     flex: 1
     background-color: $dark-theme-white
-    border: 2px grey solid
-    border-radius: 3px
+    margin: 5px 0px 5px 0px
+    border-radius: 10px
+    border: 5px $dark-theme-white solid
     cursor: pointer
     padding: 0px 5px 0px 5px
 
-    :hover
-        opacity: 50%
-        background-color: grey
+    &:hover
+        opacity: 85%
+        border: 5px $dark-theme-purple solid
 
 .track-list-item-text
     flex: 1
 
 .list-arrow
-    flex-align: end
     margin-right: 10px
+    width: 20px
 
 .drop-zone
     display: flex
@@ -44,9 +54,12 @@
     align-items: center
     background-color: $dark-theme-white
     text-align: center
-    flex: 1
     margin: 10px 5px 10px 5px
     border: 4px grey dashed
     border-radius: 10px
     box-shadow: 0px 0px 5px 5px $dark-theme-white
     min-height:150px
+
+    &.drop-zone-only
+        flex: 1
+

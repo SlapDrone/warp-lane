@@ -7,14 +7,14 @@ export class DropAreaDirective {
 
   constructor() { }
 
-  @Input('dropFunction') dropFunction: (event: any) => any;
-  @Input('dragOverClass') dragOverClass: string;
+  @Input() dropFunction: (event: any) => any;
+  @Input() dragOverClass: string;
 
   @HostBinding('class.drop-hover')
   isDragOver = false;
 
   @HostListener('drop', ['$event'])
-  onDrop(event: any) {
+  onDrop(event: any): void {
     this.dropFunction(event);
     this.cancelEvent(event);
     this.endDragTransaction();

@@ -8,14 +8,14 @@ export class EntityService {
 
   constructor() { }
 
-  private _currentEntity: BehaviorSubject<{name: string}> = new BehaviorSubject(undefined);
-  public currentEntity: Observable<{name: string}> = this._currentEntity.asObservable();
+  private currentEntitySubject: BehaviorSubject<{name: string}> = new BehaviorSubject(undefined);
+  public currentEntity: Observable<{name: string}> = this.currentEntitySubject.asObservable();
 
-  setCurrentEntity(val: {name: string}){
-    this._currentEntity.next(val);
+  setCurrentEntity(val: {name: string}): void{
+    this.currentEntitySubject.next(val);
   }
 
-  clear(){
-    this._currentEntity.next(undefined);
+  clear(): void{
+    this.currentEntitySubject.next(undefined);
   }
 }

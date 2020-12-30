@@ -19,7 +19,7 @@ export class TrackModifierComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submitTrack(){
+  submitTrack(): void{
     let headers = new HttpHeaders();
     headers = headers.append('file-name', this.trackController.originalFile.name);
     this.apiService.uploadToServer(this.trackController.originalFile, headers)
@@ -40,7 +40,7 @@ export class TrackModifierComponent implements OnInit {
     console.error(`An error occurred processing the file ${fileName}.`);
   }
 
-  saveTrack(){
+  saveTrack(): void{
     let headers = new HttpHeaders();
     headers = headers.append('file-path', this.uploadResponse['file-path']);
     this.apiService.downloadFromServer(headers).subscribe(
