@@ -2,10 +2,16 @@
 
     An API class for talking to the central server
 """
+from typing import List
 
 endpoints = ["login"]
 
 # 'login?username=steve&password=balabalba'
+
+
+def endpoint(*, endpoint=None, expected_params=None):
+    def inner(f):
+        return f
 
 
 class API:
@@ -14,7 +20,18 @@ class API:
     ):
         pass
 
-    def login(self, username: str, password: str):
+    def check_request(self, endpoint, payload, expected_payload):
+        pass
+
+    @endpoint(endpoint="login", expected_params=["user", "password"])
+    def login(
+        self,
+        username: str,
+        password: str,
+        endpoint: str = "login",
+        expected_payload: List[str] = ["username" "password"],
+    ):
+        # requests.post("https://server.com/login?username=bob")
         # the server will supply a session id upon successful login
         # store session id as this will be used with all subsequent requests
         self.session_id = ...
