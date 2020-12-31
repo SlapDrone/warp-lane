@@ -2,6 +2,13 @@
 server.py
 
 Receives an audio file over HTTP, warps it and sends it back
+
+download server code
+1. create account (talk to login database) - OPTIONAL: can be done via website
+2. log into user account (talk to login database) encrypt password with BCrypt
+3. make request to API to login (login endpoint on login server, encrypted pw in json body)
+configure hardware (interface)
+configure and submit json
 """
 from datetime import datetime
 from pathlib import Path
