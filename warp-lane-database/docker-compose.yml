@@ -1,0 +1,52 @@
+version: "3"
+services:
+
+  # postgres database
+  login-db:
+    image: postgres:13.1
+    environment:
+      POSTGRES_DB: warp-lane-login
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - login-db-data:/var/lib/postgresql/data/ # persist data even if container shuts down
+      - ./login_db/db_scripts/0100_tables:/docker-entrypoint-initdb.d/
+    ports:
+      - "5432:5432"
+
+  # postgres database
+  application-db:
+    image: postgres:13.1
+    environment:
+      POSTGRES_DB: warp-lane-app
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+      PGDATA: /var/lib/postgresql/data
+    volumes:
+      - app-db-data:/var/lib/postgresql/data/ # persist data even if container shuts down
+      - ./application_db/db_scripts/0100_tables:/docker-entrypoint-initdb.d/
+    ports:
+      - "5431:5432"
+  
+  # To add the above postgres server to pgadmin, use hostname as defined by docker: 'postgres'
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: dev@pomeron.com
+      PGADMIN_DEFAULT_PASSWORD: secret
+      PGADMIN_LISTEN_PORT: 80
+    ports:
+      - "8080:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    links:
+      - "login-db:login-pgsql-server"
+      - "application-db:app-pgsql-server"
+  
+volumes:
+  login-db-data:
+  app-db-data:
+  pgadmin-data:
+
+  
