@@ -1,0 +1,6 @@
+# example config file - copy to config.yml with your configuration
+# logger level
+log_level : WARNING
+# soundcard string identifiers (see soundcard module get_speaker/microphone)
+interface_input_id : Komplete
+interface_output_id : Komplete

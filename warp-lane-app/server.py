@@ -2,6 +2,13 @@
 server.py
 
 Receives an audio file over HTTP, warps it and sends it back
+
+download server code
+1. create account (talk to login database) - OPTIONAL: can be done via website
+2. log into user account (talk to login database) encrypt password with BCrypt
+3. make request to API to login (login endpoint on login server, encrypted pw in json body)
+configure hardware (interface)
+configure and submit json
 """
 from datetime import datetime
 from pathlib import Path
@@ -12,13 +19,17 @@ from sanic import Sanic
 from sanic import response as res
 from sanic.log import logger
 from sanic_cors import CORS
+from werkzeug.utils import secure_filename
 
 try:  # TODO SM: Received "ModuleNotFoundError: No module named 'soundcard'."
-    from warplane.audio import capture_audio_and_save  # , invert_wav_file
-except (ModuleNotFoundError, AssertionError): # Assertion error config.yml missing
-    from warplane.audio_mock import invert_wav_file as capture_audio_and_save
+    from warplane.audio import capture_audio_and_save
+except (
+    ModuleNotFoundError,
+    AssertionError,
+) as e:  # Assertion error config.yml missing
+    logger.warning(e)
+    from warplane.audio_mock import invert_wav_file as capture_audio_and_save  # type: ignore
 
-from werkzeug.utils import secure_filename
 
 app = Sanic(__name__)
 CORS(app)
@@ -66,9 +77,7 @@ def main(request):
     """
     Placeholder main page. Just returns some text.
     """
-    return res.text(
-        "I'm a teapot", status=200
-    )
+    return res.text("I'm a teapot", status=200)
 
 
 @app.route("/upload", methods=["POST", "GET"])

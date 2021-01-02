@@ -1,9 +1,10 @@
 from pathlib import Path
+
 from sanic.log import logger
 from scipy.io import wavfile
 
 
-def invert_wav_file(in_file: Path, out_dir: Path) -> Path:
+def invert_wav_file(in_file: Path, out_dir: Path, **kwargs) -> Path:
     fs_wav, wav_arr = wavfile.read(in_file)
     out_name = Path(in_file.parts[-1][:-4] + "_backwards.wav")
     out_file = out_dir / out_name

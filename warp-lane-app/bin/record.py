@@ -1,4 +1,3 @@
-import numpy
 import soundcard as sc
 
 # get a list of all speakers:
