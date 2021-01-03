@@ -4,7 +4,7 @@
 
 CREATE TABLE public.users
 (
-    "USERID" integer NOT NULL,
+    "USERID" serial,
     "USERNAME" text COLLATE pg_catalog."default",
     "PASSWORD" text COLLATE pg_catalog."default",
     "EMAILADDRESS" text COLLATE pg_catalog."default",
