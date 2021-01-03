@@ -8,7 +8,7 @@ CREATE TABLE public.unmodifiedtracks
     "UPLOADEDBYUSERID" integer NOT NULL,
     "TRACKLINK" text COLLATE pg_catalog."default",
     "TRACKNAME" text COLLATE pg_catalog."default",
-    "DATEMODIFIED" date,
+    "DATEMODIFIED" timestamp,
     CONSTRAINT unmodifiedtracks_pk PRIMARY KEY ("UNMODIFIEDTRACKID"),
     CONSTRAINT "UNMODIFIEDTRACKS_USERS_FK" FOREIGN KEY ("UPLOADEDBYUSERID")
         REFERENCES public.users ("USERID") MATCH SIMPLE

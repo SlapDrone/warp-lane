@@ -8,7 +8,7 @@ CREATE TABLE public.users
     "USERNAME" text COLLATE pg_catalog."default",
     "PASSWORD" text COLLATE pg_catalog."default",
     "EMAILADDRESS" text COLLATE pg_catalog."default",
-    "DATEMODIFIED" date,
+    "DATEMODIFIED" timestamp,
     CONSTRAINT users_pk PRIMARY KEY ("USERID")
 )
 
