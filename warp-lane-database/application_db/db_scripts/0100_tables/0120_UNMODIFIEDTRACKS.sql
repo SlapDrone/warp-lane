@@ -4,7 +4,7 @@
 
 CREATE TABLE public.unmodifiedtracks
 (
-    "UNMODIFIEDTRACKID" integer NOT NULL,
+    "UNMODIFIEDTRACKID" serial,
     "UPLOADEDBYUSERID" integer NOT NULL,
     "TRACKLINK" text COLLATE pg_catalog."default",
     "TRACKNAME" text COLLATE pg_catalog."default",

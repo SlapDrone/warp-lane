@@ -4,10 +4,10 @@
 
 CREATE TABLE public.devices
 (
-    "DEVICEID" integer NOT NULL,
+    "DEVICEID" serial,
     "ADDEDBYUSERID" integer NOT NULL,
     "DEVICENAME" text COLLATE pg_catalog."default",
-    "JSONCONFIG" text COLLATE pg_catalog."default",
+    "JSONCONFIGTEMPLATE" json,
     "DATEMODIFIED" date,
     CONSTRAINT devices_pk PRIMARY KEY ("DEVICEID"),
     CONSTRAINT "DEVICES_USERS_FK" FOREIGN KEY ("ADDEDBYUSERID")
