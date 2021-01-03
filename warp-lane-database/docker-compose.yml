@@ -3,7 +3,7 @@ services:
 
   # postgres database
   application-db:
-    image: postgres:13.1
+    build: ./application_db
     environment:
       POSTGRES_DB: warp-lane-app
       POSTGRES_USER: admin
@@ -11,7 +11,6 @@ services:
       PGDATA: /var/lib/postgresql/data
     volumes:
       - app-db-data:/var/lib/postgresql/data/ # persist data even if container shuts down
-      - ./application_db/db_scripts/0100_tables:/docker-entrypoint-initdb.d/
     ports:
       - "5432:5432"
   
