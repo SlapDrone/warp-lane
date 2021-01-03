@@ -4,11 +4,12 @@
 
 CREATE TABLE public.users
 (
-    "USERID" integer NOT NULL,
+    "USERID" serial,
     "USERNAME" text COLLATE pg_catalog."default",
     "PASSWORD" text COLLATE pg_catalog."default",
     "EMAILADDRESS" text COLLATE pg_catalog."default",
-    "DATEMODIFIED" date,
+    "DATEMODIFIED" timestamp,
+    "DATECREATED" timestamp default current_timestamp,
     CONSTRAINT users_pk PRIMARY KEY ("USERID")
 )
 

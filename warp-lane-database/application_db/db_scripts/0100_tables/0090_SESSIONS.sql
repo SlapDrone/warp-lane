@@ -4,10 +4,10 @@
 
 CREATE TABLE public.sessions
 (
-    "SESSIONID" integer NOT NULL,
+    "SESSIONID" serial,
     "USERID" integer NOT NULL,
-    "EXPIRYTIME" date,
-    "DATEMODIFIED" date,
+    "EXPIRYTIME" timestamp,
+    "DATECREATED" timestamp default current_timestamp,
     CONSTRAINT sessions_pk PRIMARY KEY ("SESSIONID")
 )
 
