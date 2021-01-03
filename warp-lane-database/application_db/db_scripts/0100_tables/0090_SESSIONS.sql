@@ -7,7 +7,7 @@ CREATE TABLE public.sessions
     "SESSIONID" serial,
     "USERID" integer NOT NULL,
     "EXPIRYTIME" timestamp,
-    "DATEMODIFIED" timestamp,
+    "DATECREATED" timestamp default current_timestamp,
     CONSTRAINT sessions_pk PRIMARY KEY ("SESSIONID")
 )
 

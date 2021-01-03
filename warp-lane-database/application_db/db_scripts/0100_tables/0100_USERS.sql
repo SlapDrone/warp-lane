@@ -9,6 +9,7 @@ CREATE TABLE public.users
     "PASSWORD" text COLLATE pg_catalog."default",
     "EMAILADDRESS" text COLLATE pg_catalog."default",
     "DATEMODIFIED" timestamp,
+    "DATECREATED" timestamp default current_timestamp,
     CONSTRAINT users_pk PRIMARY KEY ("USERID")
 )
 

@@ -9,6 +9,7 @@ CREATE TABLE public.devices
     "DEVICENAME" text COLLATE pg_catalog."default",
     "JSONCONFIGTEMPLATE" json,
     "DATEMODIFIED" timestamp,
+    "DATECREATED" timestamp default current_timestamp,
     CONSTRAINT devices_pk PRIMARY KEY ("DEVICEID"),
     CONSTRAINT "DEVICES_USERS_FK" FOREIGN KEY ("ADDEDBYUSERID")
         REFERENCES public.users ("USERID") MATCH SIMPLE

@@ -9,6 +9,7 @@ CREATE TABLE public.modifiedtracks
     "MODIFIEDBYUSERID" integer NOT NULL,
     "TRACKLINK" text COLLATE pg_catalog."default",
     "DATEMODIFIED" timestamp,
+    "DATECREATED" timestamp default current_timestamp,
     "INGESTEDBYMODEL" boolean,
     CONSTRAINT modifiedtracks_pk PRIMARY KEY ("MODIFIEDTRACKID"),
     CONSTRAINT "MODIFIEDTRACKS_UNMODIFIEDTRACKS_FK" FOREIGN KEY ("UNMODIFIEDTRACKID")
