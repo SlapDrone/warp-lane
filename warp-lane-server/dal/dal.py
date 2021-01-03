@@ -1,20 +1,25 @@
 import psycopg2
 
-def get_records():
-    conn = psycopg2.connect(
+class dal():
+
+    def __init__(self):
+        self.conn = psycopg2.connect(
         dbname="warp-lane-app", 
         host="0.0.0.0", 
         port="5432", 
         user="admin", 
         password="secret")
 
-    cur = conn.cursor()
+    def run_sql(self, sql_query):
 
-    cur.execute("SELECT * FROM users")
+        cur = self.conn.cursor()
+        cur.execute(sql_query)
+        records = cur.fetchall()
+        cur.close()
 
-    records = cur.fetchall()
-    return records
+        return records
 
 if __name__ == "__main__":
-    records = get_records()
+    dal = dal()
+    records = dal.run_sql("SELECT * FROM users")
     print(records)
