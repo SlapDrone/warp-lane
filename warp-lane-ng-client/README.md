@@ -2,6 +2,8 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.2.
 
+The web client can be ran as a docker container. Run the start-web-client.sh script to build and run the web server using docker compose.
+
 To run the commands below you first need to install node.js on your system and then install the packages required for this angular app by calling `npm install` from this directory. 
 
 On Arch Linux, `npm` is available via pacman:
