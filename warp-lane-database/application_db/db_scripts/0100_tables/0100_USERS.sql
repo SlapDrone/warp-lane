@@ -5,7 +5,7 @@
 CREATE TABLE public.users
 (
     userid serial,
-    username text COLLATE pg_catalog."default",
+    username text COLLATE pg_catalog."default" unique,
     password text COLLATE pg_catalog."default",
     emailaddress text COLLATE pg_catalog."default",
     datemodified timestamp,
