@@ -11,16 +11,19 @@ from threading import RLock
 from typing import List, Optional, Tuple, Union
 
 import numpy as np
-import soundcard as sc
 import soundfile
+import warplane.audio_interface as au
 import warplane.config as cfg
 from sanic.log import logger
 from scipy.io import wavfile
 
 lock = RLock()
 executor = ThreadPoolExecutor()
-komplete_input = sc.get_microphone(cfg.interface_input_id)  # type: ignore
-komplete_output = sc.get_speaker(cfg.interface_output_id)  # type: ignore
+# TODO: this is just selecting one audio interface from the config.yml file ATM
+interface_input = au.get_input_interface(cfg.interface_input_id)  # type: ignore
+interface_output = au.get_output_interface(cfg.interface_output_id)  # type: ignore
+channels_input = cfg.interface_input_channels  # type: ignore
+channels_output = cfg.interface_output_channels  # type: ignore
 
 
 def read_wav_file(
@@ -49,11 +52,11 @@ def read_wav_file(
 
 def pass_through_interface(
     wav_arr: np.ndarray,
-    interface_output: sc.pulseaudio._Speaker,
-    interface_input: sc.pulseaudio._Microphone,
+    interface_output=interface_output,
+    interface_input=interface_input,
     sample_rate: int = 44_100,
-    interface_input_channels: List[int] = [4, 5],
-    interface_output_channels: List[int] = [0, 1],
+    interface_input_channels: List[int] = channels_input,
+    interface_output_channels: List[int] = channels_output,
     input_blocksize: int = 128,
     output_blocksize: int = 128,
     record_grace_factor: float = 1.05,
@@ -137,21 +140,26 @@ def pass_through_interface(
 def capture_audio_and_save(
     in_file: Path,
     out_dir: Path,
-    interface_output=komplete_output,
-    interface_input=komplete_input,
-    interface_input_channels: List[int] = [4, 5],
-    interface_output_channels: List[int] = [0, 1],
+    interface_output=interface_output,
+    interface_input=interface_input,
+    interface_input_channels: List[int] = channels_input,
+    interface_output_channels: List[int] = channels_output,
     input_blocksize: int = 128,
     output_blocksize: int = 128,
     record_grace_factor=1.05,
     executor=executor,
     lock=lock,
 ) -> Path:
+    """
+    Play a wav file through the selected output channels on
+    a given audio interface and listen to the input on the
+    selected input channels.
+    """
     wav_arr, sample_rate, bit_depth = read_wav_file(in_file)
     mod_wav_arr = pass_through_interface(
         wav_arr,
-        interface_output=komplete_output,
-        interface_input=komplete_input,
+        interface_output=interface_output,
+        interface_input=interface_input,
         sample_rate=sample_rate,
         interface_input_channels=interface_input_channels,
         interface_output_channels=interface_output_channels,
