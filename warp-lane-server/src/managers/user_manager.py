@@ -1,5 +1,5 @@
 from src.dal.dal import DAL
-from src.managers.session_manager import create_session, get_sessionid_for_userid
+from src.managers.session_manager import create_session, get_sessionid_for_userid, delete_session
 from src.utils.password_encryptor import encrypt_password, check_password
 
 dal = DAL()
@@ -8,7 +8,7 @@ dal = DAL()
 def login(username, unencrypted_password):
     sessionid = None
     sql_query = (
-        'SELECT "USERID", "PASSWORD" FROM USERS WHERE "USERNAME"=%s;'
+        'SELECT userid, password FROM USERS WHERE username=%s;'
     )
     sql_result = dal.run_sql(sql_query, [username])
     userid, encrypted_password = sql_result[0]
@@ -19,6 +19,10 @@ def login(username, unencrypted_password):
         if not sessionid:
             sessionid = create_session(userid)
     return sessionid
+
+
+def logout(sessionid):
+    delete_session(sessionid)
 
 
 if __name__ == "__main__":
