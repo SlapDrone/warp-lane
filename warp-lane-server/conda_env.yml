@@ -1,0 +1,13 @@
+name: warp-lane-server
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.8
+  - bcrypt
+  - dateutils
+  - psycopg2
+  - sanic
+  - pip
+  - pip:
+      - -e .
