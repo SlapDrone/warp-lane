@@ -4,7 +4,7 @@
 
 CREATE TABLE public.sessions
 (
-    "SESSIONID" serial,
+    "SESSIONID" UUID,
     "USERID" integer NOT NULL,
     "EXPIRYTIME" timestamp,
     "DATECREATED" timestamp default current_timestamp,

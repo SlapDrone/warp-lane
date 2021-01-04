@@ -1,5 +1,6 @@
 from dal.dal import DAL
 from datetime import datetime
+from uuid import uuid4
 
 dal = DAL()
 
@@ -34,7 +35,7 @@ def delete_session(sessionid):
 
 
 def create_session(userid):
-    sql_query = f'INSERT INTO SESSIONS ("USERID", "EXPIRYTIME") VALUES ({int(userid)}, current_timestamp + (20 * interval \'1 minute\'));'
+    sql_query = f'INSERT INTO SESSIONS ("SESSIONID", "USERID", "EXPIRYTIME") VALUES (\'{uuid4()}\', {int(userid)}, current_timestamp + (20 * interval \'1 minute\'));'
     sql_result = dal.run_sql(sql_query)
 
 
