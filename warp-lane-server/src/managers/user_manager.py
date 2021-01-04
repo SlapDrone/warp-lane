@@ -1,6 +1,6 @@
-from dal.dal import DAL
-from managers.session_manager import create_session, get_sessionid_for_userid
-from utils.password_encryptor import encrypt_password, check_password
+from src.dal.dal import DAL
+from src.managers.session_manager import create_session, get_sessionid_for_userid
+from src.utils.password_encryptor import encrypt_password, check_password
 
 dal = DAL()
 

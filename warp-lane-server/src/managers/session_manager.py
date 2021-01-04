@@ -1,4 +1,4 @@
-from dal.dal import DAL
+from src.dal.dal import DAL
 from datetime import datetime
 from uuid import uuid4
 

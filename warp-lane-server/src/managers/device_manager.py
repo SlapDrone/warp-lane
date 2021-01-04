@@ -1,4 +1,4 @@
-from dal.dal import DAL
+from src.dal.dal import DAL
 
 dal = DAL()
 
@@ -9,16 +9,21 @@ def insert_device_config(userid, devicename, json):
     sql_result = dal.run_sql(sql_query, sql_params)
 
 
-def update_device_config(deviceid, userid, devicename=None, json=None):
+def _update_device_sql_builder(deviceid, userid, devicename, json):
     sql_params = []
-    sql_query = f'UPDATE DEVICES SET "LASTMODIFIEDBY"={userid}, "DATEMODIFIED"=current_timestamp'
+    sql_query = f'UPDATE DEVICES SET "LASTMODIFIEDBY" = {userid}, "DATEMODIFIED" = current_timestamp'
     if devicename:
-        sql_query += ', \"DEVICENAME\" =  %s'
+        sql_query += ', \"DEVICENAME\" = %s'
         sql_params.append(devicename)
     if json:
         sql_query += ', \"JSONCONFIGTEMPLATE\" = %s'
         sql_params.append(json)
     sql_query += f' WHERE "DEVICEID" = {deviceid}'
+    return sql_query, sql_params
+
+
+def update_device_config(deviceid, userid, devicename=None, json=None):
+    sql_query, sql_params = _update_device_sql_builder(deviceid, userid, devicename, json)
     sql_result = dal.run_sql(sql_query, sql_params)
 
 
