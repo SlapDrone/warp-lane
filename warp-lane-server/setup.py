@@ -8,6 +8,7 @@ setup(
     author_email='author@gmail.com',
     description='Description of my package',
     packages=find_packages(),
+    scripts=['bin/warp_lane_server.py'],
     install_requires=[
         'bcrypt',
         'dateutils',
