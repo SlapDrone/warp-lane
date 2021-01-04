@@ -4,21 +4,21 @@
 
 CREATE TABLE public.modifiedtracks
 (
-    "MODIFIEDTRACKID" serial,
-    "UNMODIFIEDTRACKID" integer NOT NULL,
-    "MODIFIEDBYUSERID" integer NOT NULL,
-    "TRACKLINK" text COLLATE pg_catalog."default",
-    "DATEMODIFIED" timestamp,
-    "DATECREATED" timestamp default current_timestamp,
-    "INGESTEDBYMODEL" boolean,
-    CONSTRAINT modifiedtracks_pk PRIMARY KEY ("MODIFIEDTRACKID"),
-    CONSTRAINT "MODIFIEDTRACKS_UNMODIFIEDTRACKS_FK" FOREIGN KEY ("UNMODIFIEDTRACKID")
-        REFERENCES public.unmodifiedtracks ("UNMODIFIEDTRACKID") MATCH SIMPLE
+    modifiedtrackid serial,
+    unmodifiedtrackid integer NOT NULL,
+    modifiedbyuserid integer NOT NULL,
+    tracklink text COLLATE pg_catalog."default",
+    datemodified timestamp,
+    datecreated timestamp default current_timestamp,
+    ingestedbymodel boolean,
+    CONSTRAINT modifiedtracks_pk PRIMARY KEY (modifiedtrackid),
+    CONSTRAINT "MODIFIEDTRACKS_UNMODIFIEDTRACKS_FK" FOREIGN KEY (unmodifiedtrackid)
+        REFERENCES public.unmodifiedtracks (unmodifiedtrackid) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID,
-    CONSTRAINT "MODIFIEDTRACKS_USERS_FK" FOREIGN KEY ("MODIFIEDBYUSERID")
-        REFERENCES public.users ("USERID") MATCH SIMPLE
+    CONSTRAINT "MODIFIEDTRACKS_USERS_FK" FOREIGN KEY (modifiedbyuserid)
+        REFERENCES public.users (userid) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID
@@ -34,7 +34,7 @@ ALTER TABLE public.modifiedtracks
 
 CREATE INDEX "fki_MODIFIEDTRACKS_UNMODIFIEDTRACKS_FK"
     ON public.modifiedtracks USING btree
-    ("UNMODIFIEDTRACKID" ASC NULLS LAST)
+    (unmodifiedtrackid ASC NULLS LAST)
     TABLESPACE pg_default;
 -- Index: fki_MODIFIEDTRACKS_USERS_FK
 
@@ -42,5 +42,5 @@ CREATE INDEX "fki_MODIFIEDTRACKS_UNMODIFIEDTRACKS_FK"
 
 CREATE INDEX "fki_MODIFIEDTRACKS_USERS_FK"
     ON public.modifiedtracks USING btree
-    ("MODIFIEDBYUSERID" ASC NULLS LAST)
+    (modifiedbyuserid ASC NULLS LAST)
     TABLESPACE pg_default;

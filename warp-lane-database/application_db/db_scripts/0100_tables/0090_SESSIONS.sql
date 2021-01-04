@@ -4,11 +4,11 @@
 
 CREATE TABLE public.sessions
 (
-    "SESSIONID" serial,
-    "USERID" integer NOT NULL,
-    "EXPIRYTIME" timestamp,
-    "DATECREATED" timestamp default current_timestamp,
-    CONSTRAINT sessions_pk PRIMARY KEY ("SESSIONID")
+    sessionid UUID,
+    userid integer NOT NULL,
+    expirytime timestamp,
+    datecreated timestamp default current_timestamp,
+    CONSTRAINT sessions_pk PRIMARY KEY (sessionid)
 )
 
 TABLESPACE pg_default;
