@@ -4,15 +4,15 @@
 
 CREATE TABLE public.unmodifiedtracks
 (
-    "UNMODIFIEDTRACKID" serial,
-    "UPLOADEDBYUSERID" integer NOT NULL,
-    "TRACKLINK" text COLLATE pg_catalog."default",
-    "TRACKNAME" text COLLATE pg_catalog."default",
-    "DATEMODIFIED" timestamp,
-    "DATECREATED" timestamp default current_timestamp,
-    CONSTRAINT unmodifiedtracks_pk PRIMARY KEY ("UNMODIFIEDTRACKID"),
-    CONSTRAINT "UNMODIFIEDTRACKS_USERS_FK" FOREIGN KEY ("UPLOADEDBYUSERID")
-        REFERENCES public.users ("USERID") MATCH SIMPLE
+    unmodifiedtrackid serial,
+    uploadedbyuserid integer NOT NULL,
+    tracklink text COLLATE pg_catalog."default",
+    trackname text COLLATE pg_catalog."default",
+    datemodified timestamp,
+    datecreated timestamp default current_timestamp,
+    CONSTRAINT unmodifiedtracks_pk PRIMARY KEY (unmodifiedtrackid),
+    CONSTRAINT "UNMODIFIEDTRACKS_USERS_FK" FOREIGN KEY (uploadedbyuserid)
+        REFERENCES public.users (userid) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID
@@ -28,5 +28,5 @@ ALTER TABLE public.unmodifiedtracks
 
 CREATE INDEX "fki_UNMODIFIEDTRACKS_USERS_FK"
     ON public.unmodifiedtracks USING btree
-    ("UPLOADEDBYUSERID" ASC NULLS LAST)
+    (uploadedbyuserid ASC NULLS LAST)
     TABLESPACE pg_default;

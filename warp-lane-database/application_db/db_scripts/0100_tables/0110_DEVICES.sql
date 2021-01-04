@@ -4,16 +4,16 @@
 
 CREATE TABLE public.devices
 (
-    "DEVICEID" serial,
-    "ADDEDBYUSERID" integer NOT NULL,
-    "DEVICENAME" text COLLATE pg_catalog."default",
-    "JSONCONFIGTEMPLATE" json,
-    "LASTMODIFIEDBY" integer,
-    "DATEMODIFIED" timestamp,
-    "DATECREATED" timestamp default current_timestamp,
-    CONSTRAINT devices_pk PRIMARY KEY ("DEVICEID"),
-    CONSTRAINT "DEVICES_USERS_FK" FOREIGN KEY ("ADDEDBYUSERID")
-        REFERENCES public.users ("USERID") MATCH SIMPLE
+    deviceid serial,
+    addedbyuserid integer NOT NULL,
+    devicename text COLLATE pg_catalog."default",
+    jsonconfigtemplate json,
+    lastmodifiedby integer,
+    datemodified timestamp,
+    datecreated timestamp default current_timestamp,
+    CONSTRAINT devices_pk PRIMARY KEY (deviceid),
+    CONSTRAINT "DEVICES_USERS_FK" FOREIGN KEY (addedbyuserid)
+        REFERENCES public.users (userid) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
 )
@@ -28,5 +28,5 @@ ALTER TABLE public.devices
 
 CREATE INDEX "fki_DEVICES_USERS_FK"
     ON public.devices USING btree
-    ("ADDEDBYUSERID" ASC NULLS LAST)
+    (addedbyuserid ASC NULLS LAST)
     TABLESPACE pg_default;
