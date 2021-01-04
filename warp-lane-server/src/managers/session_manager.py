@@ -35,8 +35,10 @@ def delete_session(sessionid):
 
 
 def create_session(userid):
-    sql_query = f'INSERT INTO SESSIONS ("SESSIONID", "USERID", "EXPIRYTIME") VALUES (\'{uuid4()}\', {int(userid)}, current_timestamp + (20 * interval \'1 minute\'));'
+    sessionid = uuid4()
+    sql_query = f'INSERT INTO SESSIONS ("SESSIONID", "USERID", "EXPIRYTIME") VALUES (\'{sessionid}\', {int(userid)}, current_timestamp + (20 * interval \'1 minute\'));'
     sql_result = dal.run_sql(sql_query)
+    return sessionid
 
 
 def update_session(sessionid):

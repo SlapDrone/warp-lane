@@ -17,8 +17,7 @@ def login(username, unencrypted_password):
     if valid:
         sessionid = get_sessionid_for_userid(userid)
         if not sessionid:
-            create_session(userid)
-            sessionid = get_sessionid_for_userid(userid)
+            sessionid = create_session(userid)
     return sessionid
 
 
