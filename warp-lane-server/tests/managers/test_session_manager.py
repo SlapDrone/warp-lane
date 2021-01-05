@@ -11,7 +11,7 @@ class TestSessionManager(TestCase):
         self.assertTrue(len(self.sessionid) > 10)
 
     def test_get_sessionid_for_userid(self):
-        sessionid = sm.get_sessionid_for_userid(self.userid)
+        sessionid = sm.get_session_id_for_user_id(self.userid)
         self.assertEqual(sessionid, str(self.sessionid))
 
     def test_update_session(self):

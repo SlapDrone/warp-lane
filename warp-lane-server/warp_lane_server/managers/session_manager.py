@@ -5,27 +5,27 @@ from uuid import uuid4
 dal = DAL()
 
 
-def check_session(sessionid):
+def check_session(session_id):
     """
     Parameters
     ==========
 
-    sessionid: string
+    session_id: string
     """
     success = False
-    sql_query = f'SELECT expirytime FROM SESSIONS WHERE sessionid={sessionid}'
+    sql_query = f'SELECT expirytime FROM SESSIONS WHERE sessionid={session_id}'
     result = dal.run_sql(sql_query)
     if len(result) > 0:
-        expirytime = result[0][0]
-        if expirytime > datetime.utcnow():
-            update_session(sessionid)
+        expiry_time = result[0][0]
+        if expiry_time > datetime.utcnow():
+            update_session(session_id)
             success = True
         else:
-            delete_session(sessionid)
+            delete_session(session_id)
     return success
 
 
-def get_sessionid_for_userid(userid):
+def get_session_id_for_user_id(userid):
     """
     Parameters
     ==========

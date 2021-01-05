@@ -1,4 +1,6 @@
 import warp_lane_server.managers.user_manager as user_man
+import warp_lane_server.exceptions as wl_exceptions
+
 
 from sanic import Sanic, response
 from sanic.response import json
@@ -15,7 +17,7 @@ def main(request):
     """
     Placeholder main page. Just returns some text.
     """
-    return response.text("I'm a teapot", status=200)
+    return response.text("I'm the warp-lane-server.", status=200)
 
 
 @app.post("/login")
@@ -30,36 +32,39 @@ def main(request):
     in "error" json field.
     """
 
+    # Ensure the request matches specification.
     try:
         username = request.form["username"][0]
-        password = request.form["password"][0]
-        session_id = user_man.login(username, password)
-
-        if session_id == 'no_user':
-            logger.info(session_id)
-            logger.info('User not found')
-            return json(
-                {"error": "user not recognised"},
-                status=400,
-            )
-        if session_id == 'wrong_password':
-            logger.info(session_id)
-            logger.info('wrong password')
-            return json(
-                {"error": "incorrect password"},
-                status=400,
-            )
-
+        given_password = request.form["password"][0]
+    except (KeyError, IndexError):
         return json(
-            {"session_id": session_id},
-            status=200
-        )
-
-    except KeyError:
-        return json(
-            {"error": "malformed parameters"},
+            {"error": "Malformed request parameters"},
             status=400,
         )
+
+    # Get the user info, check they exist.
+    try:
+        user = user_man.get_user_from_table(username)
+    except wl_exceptions.UserNotFoundError:
+        return json(
+            {"error": "User not found"},
+            status=400,
+        )
+
+    # Check their supplied credentials.
+    try:
+        user_man.check_credentials(user, given_password)
+    except wl_exceptions.WrongPasswordError:
+        return json(
+            {"error": "Incorrect password"},
+            status=400,
+        )
+
+    session_id = user_man.return_valid_session_id_for_user(user)
+    return json(
+        {"session_id": session_id},
+        status=200
+    )
 
 
 if __name__ == "__main__":
