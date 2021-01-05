@@ -78,7 +78,7 @@ class AudioDevice:
         self.outputs = (
             outputs
             if isinstance(outputs, dict)
-            else self._assign_keys("output", inputs)
+            else self._assign_keys("output", outputs)
         )
         if not controls:
             controls = set()
@@ -111,7 +111,7 @@ class AudioDevice:
     def remove_control(self, control: Union[DeviceControl, str]):
         if isinstance(control, str):
             control = self.get_control(control)
-        self.controls.pop(control)
+        self.controls.remove(control)
 
     def _assign_keys(self, prefix, values):
         if isinstance(values, int):

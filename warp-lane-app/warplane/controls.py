@@ -89,6 +89,11 @@ class DeviceControl:
     ----------
     name :
         A string name to give this control e.g. "fancy knob 2".
+
+    Attributes
+    ----------
+    controls :
+        A set tracking subclasses of DeviceControl
     """
 
     controls: Optional[Any] = set()
@@ -138,6 +143,7 @@ class BaseDial(DeviceControl, metaclass=abc.ABCMeta):
     Base class for a dial component.
     """
 
+    @abc.abstractmethod
     def __init__(
         self,
         name: str,
