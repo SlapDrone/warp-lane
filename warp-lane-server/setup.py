@@ -8,11 +8,12 @@ setup(
     author_email='dev@pomeron.io',
     description='Description of my package',
     packages=find_packages(),
-    scripts=['scripts/run_server.py'],
+    #    scripts=['scripts/run_server.py'],
     install_requires=[
         'bcrypt',
         'dateutils',
         'psycopg2',
+        'requests',
         'sanic',
     ],
 )

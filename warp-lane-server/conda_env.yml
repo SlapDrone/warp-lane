@@ -8,8 +8,8 @@ dependencies:
   - dateutils
   - psycopg2
   - sanic
+  - requests
   - pip
   - pip:
       - -e .
-      -
  

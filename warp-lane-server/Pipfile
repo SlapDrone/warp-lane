@@ -8,8 +8,10 @@ psycopg2-binary = "*"
 bcrypt = "*"
 dateutils = "*"
 sanic = "*"
+requests = "*"
 
 [dev-packages]
+warp_lane_server = {editable = true, path = "."}
 black = "*"
 pytest = "*"
 

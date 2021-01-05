@@ -8,11 +8,12 @@ dal = DAL()
 def login(username, unencrypted_password):
     sessionid = None
     sql_query = (
-        'SELECT userid, password FROM USERS WHERE username=%s;'
+        'SELECT userid, password FROM USERS WHERE username = %s;'
     )
     sql_result = dal.run_sql(sql_query, [username])
     userid, encrypted_password = sql_result[0]
-    valid = check_password(unencrypted_password, encrypted_password.encode("utf8"))
+    valid = check_password(unencrypted_password,
+                           encrypted_password.encode("utf8"))
 
     if valid:
         sessionid = get_sessionid_for_userid(userid)
