@@ -45,9 +45,8 @@ class User:
             user.email = sql[3]
             user.date_added = sql[4]
             user.date_last_seen = sql[5]
-
             return user
-        except IndexError:
+        except (IndexError, TypeError):
             raise wl_exceptions.UserBuildError
 
 
@@ -116,6 +115,13 @@ def return_valid_session_id_for_user(user):
     if not session_id:
         session_id = sesh_man.create_session(user.user_id)
     return session_id
+
+
+def login_backend(username, given_password):
+    """Backend function to carry out the full login process."""
+    user = get_user_from_table(username)
+    check_credentials(user, given_password)
+    return return_valid_session_id_for_user(user)
 
 
 def create_user(username, unencrypted_password, email_address):

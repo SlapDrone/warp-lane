@@ -17,11 +17,11 @@ def main(request):
     """
     Placeholder main page. Just returns some text.
     """
-    return response.text("I'm the warp-lane-server.", status=200)
+    return response.text("I'm the warp-lane server.", status=200)
 
 
 @app.post("/login")
-def main(request):
+def login(request):
     """
     Handle HTTP requests to login to the server.
 
@@ -31,11 +31,46 @@ def main(request):
     If username or password are wrong, status 400 response with reason
     in "error" json field.
     """
-
     # Ensure the request matches specification.
     try:
         username = request.form[wl_text.login_param_username][0]
         given_password = request.form[wl_text.login_param_password][0]
+    except (KeyError, IndexError):
+        return json(
+            {wl_text.generic_error_key: wl_text.generic_message_malformed},
+            status=400,
+        )
+
+    # Use the backend to get a session ID.
+    try:
+        session_id = user_man.login_backend(username, given_password)
+        return json(
+            {wl_text.session_id_key: session_id},
+            status=200
+        )
+    # Handle bad usernames or passwords.
+    except wl_exceptions.UserNotFoundError:
+        return json(
+            {wl_text.generic_error_key: wl_text.login_message_bad_username},
+            status=400,
+        )
+    except wl_exceptions.WrongPasswordError:
+        return json(
+            {wl_text.generic_error_key: wl_text.login_message_bad_pw},
+            status=400,
+        )
+
+
+@app.get("/get_unmodified_tracks")
+def get_unmodified_tracks(request):
+    """
+    Get the unmodified tracks for this user.
+
+    Requires the parameter session_id.
+    """
+    # Ensure the request matches specification.
+    try:
+        session_id = request.args[wl_text.session_id_key][0]
     # Catch malformed requests.
     except (KeyError, IndexError):
         return json(
@@ -43,29 +78,7 @@ def main(request):
             status=400,
         )
 
-    # Get the user info, check they exist.
-    try:
-        user = user_man.get_user_from_table(username)
-    except wl_exceptions.UserNotFoundError:
-        return json(
-            {wl_text.generic_error_key: wl_text.login_message_bad_username},
-            status=400,
-        )
-
-    # Check their supplied credentials.
-    try:
-        user_man.check_credentials(user, given_password)
-    except wl_exceptions.WrongPasswordError:
-        return json(
-            {wl_text.generic_error_key: wl_text.login_message_bad_pw},
-            status=400,
-        )
-
-    session_id = user_man.return_valid_session_id_for_user(user)
-    return json(
-        {wl_text.login_key_session_id: session_id},
-        status=200
-    )
+    return response.text("Placeholder success text.", status=200)
 
 
 if __name__ == "__main__":

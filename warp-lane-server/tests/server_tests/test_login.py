@@ -15,7 +15,7 @@ def nested_update(d, u):
 
 
 class TestServerLogin:
-    """Note: server must be running on localhost for this test suite!"""
+    """Note: server and db must be running on localhost for this test suite!"""
     url = 'http://0.0.0.0:8001/login'
 
     username = 'admin'
@@ -33,7 +33,7 @@ class TestServerLogin:
                 wl_text.login_param_password: password,
             },
             'status_code': 200,
-            'response_keys': [wl_text.login_key_session_id],
+            'response_keys': [wl_text.session_id_key],
         },
         'bad_username': {
             'payload': {
