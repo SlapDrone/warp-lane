@@ -1,6 +1,6 @@
-from src.dal.dal import DAL
-from src.managers.session_manager import create_session, get_sessionid_for_userid, delete_session
-from src.utils.password_encryptor import encrypt_password, check_password
+from warp_lane_server.dal.dal import DAL
+from warp_lane_server.managers.session_manager import create_session, get_sessionid_for_userid, delete_session
+from warp_lane_server.utils.password_encryptor import encrypt_password, check_password
 
 dal = DAL()
 

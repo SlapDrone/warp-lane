@@ -1,4 +1,4 @@
-from src.dal.dal import DAL
+from warp_lane_server.dal.dal import DAL
 
 dal = DAL()
 
