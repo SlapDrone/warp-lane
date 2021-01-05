@@ -9,7 +9,7 @@ dependencies:
   - psycopg2
   - sanic
   - requests
+  - pytest
   - pip
   - pip:
       - -e .
- 

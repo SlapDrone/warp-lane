@@ -15,5 +15,6 @@ setup(
         'psycopg2',
         'requests',
         'sanic',
+        'pytest',
     ],
 )

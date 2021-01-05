@@ -9,6 +9,7 @@ bcrypt = "*"
 dateutils = "*"
 sanic = "*"
 requests = "*"
+pytest = "*"
 
 [dev-packages]
 warp_lane_server = {editable = true, path = "."}

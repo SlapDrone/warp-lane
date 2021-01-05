@@ -1,6 +1,6 @@
 import warp_lane_server.managers.user_manager as user_man
 import warp_lane_server.exceptions as wl_exceptions
-
+import warp_lane_server.text as wl_text
 
 from sanic import Sanic, response
 from sanic.response import json
@@ -34,11 +34,12 @@ def main(request):
 
     # Ensure the request matches specification.
     try:
-        username = request.form["username"][0]
-        given_password = request.form["password"][0]
+        username = request.form[wl_text.login_param_username][0]
+        given_password = request.form[wl_text.login_param_password][0]
+    # Catch malformed requests.
     except (KeyError, IndexError):
         return json(
-            {"error": "Malformed request parameters"},
+            {wl_text.generic_error_key: wl_text.generic_message_malformed},
             status=400,
         )
 
@@ -47,7 +48,7 @@ def main(request):
         user = user_man.get_user_from_table(username)
     except wl_exceptions.UserNotFoundError:
         return json(
-            {"error": "User not found"},
+            {wl_text.generic_error_key: wl_text.login_message_bad_username},
             status=400,
         )
 
@@ -56,13 +57,13 @@ def main(request):
         user_man.check_credentials(user, given_password)
     except wl_exceptions.WrongPasswordError:
         return json(
-            {"error": "Incorrect password"},
+            {wl_text.generic_error_key: wl_text.login_message_bad_pw},
             status=400,
         )
 
     session_id = user_man.return_valid_session_id_for_user(user)
     return json(
-        {"session_id": session_id},
+        {wl_text.login_key_session_id: session_id},
         status=200
     )
 
