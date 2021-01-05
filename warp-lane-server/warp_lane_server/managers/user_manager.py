@@ -6,20 +6,36 @@ dal = DAL()
 
 
 def login(username, unencrypted_password):
-    sessionid = None
+    """
+    Cross check the user's id and credentials with the user database.
+
+    If correct, return session_id.
+    Else return a text code for sanic (clumsy but want to refactor a lot of
+    this code).
+    """
+    session_id = None
     sql_query = (
         'SELECT userid, password FROM USERS WHERE username = %s;'
     )
+    print(sql_query)
+    print(username)
     sql_result = dal.run_sql(sql_query, [username])
-    userid, encrypted_password = sql_result[0]
-    valid = check_password(unencrypted_password,
-                           encrypted_password.encode("utf8"))
+    try:
+        userid, encrypted_password = sql_result[0]
+        print(unencrypted_password)
+        print(type(unencrypted_password))
+        valid = check_password(unencrypted_password,
+                               encrypted_password.encode("utf8"))
+    except IndexError:
+        return 'no_user'
 
     if valid:
-        sessionid = get_sessionid_for_userid(userid)
-        if not sessionid:
-            sessionid = create_session(userid)
-    return sessionid
+        session_id = get_sessionid_for_userid(userid)
+        if not session_id:
+            session_id = create_session(userid)
+        return session_id
+
+    return 'wrong_password'
 
 
 def create_user(username, unencrypted_password, email_address):

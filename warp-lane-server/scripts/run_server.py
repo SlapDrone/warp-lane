@@ -2,6 +2,8 @@ import warp_lane_server.managers.user_manager as user_man
 
 from sanic import Sanic, response
 from sanic.response import json
+from sanic.log import logger
+
 
 server_home_dir = "/tmp"
 app = Sanic(__name__)
@@ -16,19 +18,43 @@ def main(request):
     return response.text("I'm a teapot", status=200)
 
 
-@app.route("/login", methods=["POST"])
+@app.post("/login")
 def main(request):
     """
     Handle HTTP requests to login to the server.
 
-    Returns a session ID, needed for all other endpoints.
+    If correct username and password, returns a session ID that is needed
+    for all other endpoints.
+
+    If username or password are wrong, status 400 response with reason
+    in "error" json field.
     """
-    request_args = request.get_args()
+
     try:
-        username = request_args["username"]
-        password = request_args["password"]
+        username = request.form["username"][0]
+        password = request.form["password"][0]
         session_id = user_man.login(username, password)
-        return session_id
+
+        if session_id == 'no_user':
+            logger.info(session_id)
+            logger.info('User not found')
+            return json(
+                {"error": "user not recognised"},
+                status=400,
+            )
+        if session_id == 'wrong_password':
+            logger.info(session_id)
+            logger.info('wrong password')
+            return json(
+                {"error": "incorrect password"},
+                status=400,
+            )
+
+        return json(
+            {"session_id": session_id},
+            status=200
+        )
+
     except KeyError:
         return json(
             {"error": "malformed parameters"},
