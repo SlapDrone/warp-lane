@@ -35,21 +35,23 @@ class TestServerLogin:
             'status_code': 200,
             'response_keys': [wl_text.login_key_session_id],
         },
-        'bad_user': {
+        'bad_username': {
             'payload': {
                 wl_text.login_param_username: bad_username,
                 wl_text.login_param_password: password,
             },
             'status_code': 400,
             'response_keys': [wl_text.generic_error_key],
+            'error_msg': wl_text.login_message_bad_username
         },
-        'bad_pw': {
+        'bad_password': {
             'payload': {
                 wl_text.login_param_username: username,
                 wl_text.login_param_password: bad_password,
             },
             'status_code': 400,
             'response_keys': [wl_text.generic_error_key],
+            'error_msg': wl_text.login_message_bad_pw,
         }
     }
 
@@ -83,3 +85,9 @@ class TestServerLogin:
         assert(all(
             [k in config['response_json'] for k in config['response_keys']])
         )
+
+    @pytest.mark.parametrize('config', [cases_dict['bad_password'],
+                                        cases_dict['bad_username']]
+                             )
+    def test_error_messages(self, config):
+        assert config['error_msg'] == config['response_json']['error']
