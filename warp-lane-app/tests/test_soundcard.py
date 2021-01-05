@@ -28,9 +28,9 @@ def test_get_interface_metadata():
 
 def test_get_input_interface():
     inputs = sc.get_input_interfaces()
-    sc.get_input_interface(inputs[0].name)
+    assert sc.get_input_interface(inputs[0].name)
 
 
 def test_get_output_interface():
     outputs = sc.get_output_interfaces()
-    sc.get_output_interface(outputs[0].name)
+    assert sc.get_output_interface(outputs[0].name)
