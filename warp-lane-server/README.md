@@ -8,6 +8,13 @@ warp_lane_server package installed in editable mode.
 
 Must be run from this dir.
 
+### Pip
+Set up an appropriate virtualenv then install:
+
+```bash
+python setup.py install
+```
+
 ### Conda
 Create a conda env from conda_env.yml:
 
