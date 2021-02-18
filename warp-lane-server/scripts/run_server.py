@@ -5,11 +5,13 @@ import warp_lane_server.text as wl_text
 from sanic import Sanic, response
 from sanic.response import json
 from sanic.log import logger
-
+from sanic_cors import CORS, cross_origin
+from json import loads as json_loads
 
 server_home_dir = "/tmp"
 app = Sanic(__name__)
 app.config.PORT = 8001
+CORS(app)
 
 
 @app.route("/", methods=["GET", "OPTIONS"])
@@ -33,8 +35,14 @@ def login(request):
     """
     # Ensure the request matches specification.
     try:
-        username = request.form[wl_text.login_param_username][0]
-        given_password = request.form[wl_text.login_param_password][0]
+        # SM: hackily modified this for the sake of the webapp feel free to refactor!
+        if request.body:
+            body = json_loads(request.body)
+            username = body[wl_text.login_param_username]
+            given_password = body[wl_text.login_param_password]
+        else:
+            username = request.form[wl_text.login_param_username][0]
+            given_password = request.form[wl_text.login_param_password][0]
     except (KeyError, IndexError):
         return json(
             {wl_text.generic_error_key: wl_text.generic_message_malformed},

@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FileConverterModule } from './file-converter/file-converter.module';
 import { UserModule } from './user/user.module';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { UserModule } from './user/user.module';
     HttpClientModule,
     AppRoutingModule,
     FileConverterModule,
-    UserModule
+    UserModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
