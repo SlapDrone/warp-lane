@@ -55,9 +55,8 @@ export class LoginDialog {
   public password: string;
 
   public get canLogin(): boolean{
-    if(this.username && this.password){
-      return true;
-    }
+    return this.usernameFormControl.valid 
+        && this.passwordFormControl.valid;
   }
 
   login = () => {

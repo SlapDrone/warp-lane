@@ -25,5 +25,5 @@
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Close</button>
-    <button mat-button (click)="login()" [mat-dialog-close]="">Login</button>
+    <button mat-button (click)="login()" [disabled]="!canLogin" [mat-dialog-close]="">Login</button>
 </div>
