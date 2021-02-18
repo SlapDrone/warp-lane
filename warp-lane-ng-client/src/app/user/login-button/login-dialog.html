@@ -1,11 +1,29 @@
 <h1 mat-dialog-title>Login</h1>
 <div mat-dialog-content>
-  <p>Username:</p>
-  <input matInput [(ngModel)]="username">
-  <p>Password:</p>
-  <input matInput [(ngModel)]="password">
+    <mat-form-field>
+        <mat-label>Username:</mat-label>
+        <input matInput [(ngModel)]="username" [formControl]="usernameFormControl"
+            [errorStateMatcher]="matcher">
+        <mat-error *ngIf="!usernameFormControl.hasError('required')">
+            Please enter a username.
+        </mat-error>
+        <mat-error *ngIf="usernameFormControl.hasError('required')">
+            Username is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Password:</mat-label>
+        <input type="password" matInput [(ngModel)]="password" [formControl]="passwordFormControl"
+            [errorStateMatcher]="matcher">
+        <mat-error *ngIf="!passwordFormControl.hasError('required')">
+            Please enter a password.
+        </mat-error>
+        <mat-error *ngIf="passwordFormControl.hasError('required')">
+            Password is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Close</button>
-  <button mat-button (click)="login()" [mat-dialog-close]="">Login</button>
+    <button mat-button (click)="onNoClick()">Close</button>
+    <button mat-button (click)="login()" [mat-dialog-close]="">Login</button>
 </div>

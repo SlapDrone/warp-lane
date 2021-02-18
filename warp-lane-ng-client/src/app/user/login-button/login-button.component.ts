@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { LoginService } from '../login.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
 
 export interface DialogData {
   
@@ -62,4 +64,20 @@ export class LoginDialog {
     this.loginService.login(this.username, this.password)
   }
 
+  matcher = new MyErrorStateMatcher();
+
+  passwordFormControl = new FormControl('', [
+    Validators.required
+  ]);
+  usernameFormControl = new FormControl('', [
+    Validators.required
+  ]);
+
 }
+
+export class MyErrorStateMatcher implements ErrorStateMatcher {
+    isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+      const isSubmitted = form && form.submitted;
+      return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
+    }
+  }

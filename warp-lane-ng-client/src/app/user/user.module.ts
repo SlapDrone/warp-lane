@@ -5,6 +5,7 @@ import { LoginButtonComponent, LoginDialog } from './login-button/login-button.c
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +18,9 @@ import {MatInputModule} from '@angular/material/input';
     CommonModule,
     MatDialogModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     LoginButtonComponent
