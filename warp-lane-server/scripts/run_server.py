@@ -69,6 +69,48 @@ def login(request):
         )
 
 
+@app.post("/create_user")
+def create_user(request):
+    """
+    Handle HTTP requests to create a user.
+
+    If successfully created, returns a session ID that is needed
+    for all other endpoints.
+
+    If username, email_address or password are missing, 
+    status 400 response with reason in "error" json field.
+    """
+    # Ensure the request matches specification.
+    try:
+        # SM: hackily modified this for the sake of the webapp feel free to refactor!
+        if request.body:
+            body = json_loads(request.body)
+            username = body[wl_text.login_param_username]
+            given_password = body[wl_text.login_param_password]
+            email = body[wl_text.login_param_email_address]
+    except (KeyError, IndexError):
+        return json(
+            {wl_text.generic_error_key: wl_text.generic_message_malformed},
+            status=400,
+        )
+
+    # Use the backend to get a session ID.
+    try:
+        user_man.create_user(username, given_password, email_address)
+        
+        session_id = user_man.login_backend(username, given_password)
+        return json(
+            {wl_text.session_id_key: session_id},
+            status=200
+        )
+    # Handle bad usernames or passwords.
+    except Exception:
+        return json(
+            {wl_text.generic_error_key: wl_text.create_user_error},
+            status=500,
+        )
+
+
 @app.get("/get_unmodified_tracks")
 def get_unmodified_tracks(request):
     """

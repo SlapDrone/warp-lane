@@ -55,11 +55,11 @@ def get_user_from_table(username):
     Get the row of data from the user table for this username.
 
     Parameters
-    ==========
+    ----------
     username: string
 
     Returns
-    ==========
+    -------
     Instance of User class with data populated from SQL users table
 
     Raises
@@ -127,7 +127,7 @@ def login_backend(username, given_password):
 def create_user(username, unencrypted_password, email_address):
     """
     Parameters
-    ==========
+    ----------
 
     username: string
     unencrypted_password: string
@@ -145,7 +145,7 @@ def create_user(username, unencrypted_password, email_address):
 def delete_user(username):
     """
     Parameters
-    ==========
+    ----------
 
     username: string
     """
@@ -158,7 +158,7 @@ def delete_user(username):
 def logout(session_id):
     """
     Parameters
-    ==========
+    ----------
     session_id: string
     """
     sesh_man.delete_session(session_id)

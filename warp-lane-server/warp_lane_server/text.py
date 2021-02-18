@@ -13,6 +13,9 @@ session_id_key = 'session_id'
 # Login response messages/keys
 login_param_username = 'username'
 login_param_password = 'password'
+login_param_email = 'email_address'
 
 login_message_bad_pw = 'Wrong password.'
 login_message_bad_username = 'User not found.'
+
+create_user_error = "An error occurred creating the user."
