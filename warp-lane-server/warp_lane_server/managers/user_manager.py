@@ -124,21 +124,22 @@ def login_backend(username, given_password):
     return return_valid_session_id_for_user(user)
 
 
-def create_user(username, unencrypted_password, email_address):
+def create_user(username, encrypted_password, email_address):
     """
     Parameters
     ----------
 
     username: string
-    unencrypted_password: string
+    encrypted_password: string
     email_address: string
     """
     sql_query = (
-        'INSERT INTO users (username, password, emailaddress) VALUES (%s, %s, %s)'
+        "INSERT INTO users (username, password, emailaddress) VALUES" +
+        f" (%s, \'{encrypted_password.decode('utf-8')}\', %s)"
     )
     sql_result = dal.run_sql(
         sql_query,
-        (username, unencrypted_password, email_address)
+        (username, email_address)
     )
 
 
