@@ -8,7 +8,7 @@ import { TrackControllerService } from '../track-controller.service';
 @Component({
   selector: 'wl-my-track-search',
   templateUrl: './my-track-search.component.html',
-  styleUrls: ['./my-track-search.component.sass']
+  styleUrls: ['./my-track-search.component.scss']
 })
 export class MyTrackSearchComponent implements OnInit {
 

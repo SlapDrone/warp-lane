@@ -1,0 +1,63 @@
+:host{
+    width: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    overflow-y: hidden;
+}
+.track-list{
+    min-height: 200px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.track-list-section{
+    flex: 1;
+}
+
+.track-list-container{
+    margin: 10px 20px 10px 20px;
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;}
+
+.track-list-item{
+    line-height: 30px;
+    max-height: 30px;
+    display: flex;
+    flex: 1;
+    margin: 5px 0px 5px 0px;
+    border-radius: 10px;
+    border: 5px;
+    cursor: pointer;
+    padding: 0px 5px 0px 5px;
+
+    &:hover{
+        opacity: 85%;
+        border: 5px;
+    }
+}
+
+.track-list-item-text{
+    flex: 1;
+}
+.list-arrow{
+    margin-right: 10px;
+    width: 20px;
+}
+.drop-zone{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 10px 5px 10px 5px;
+    border: 4px grey dashed;
+    border-radius: 10px;
+    min-height:150px;
+
+    &.drop-zone-only{
+        flex: 1;
+    }
+}

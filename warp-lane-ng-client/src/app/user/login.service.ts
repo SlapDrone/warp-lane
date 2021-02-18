@@ -20,12 +20,13 @@ export class LoginService {
         );
     }
 
-    private _sessionId: string;
+
+    public sessionId: string;
 
     private handleSuccess(data: any): void {
         console.log()
         console.log('Login Successful');
-        this._sessionId = data['session_id'];
+        this.sessionId = data['session_id'];
     }
 
     private handleError(data: any): void {

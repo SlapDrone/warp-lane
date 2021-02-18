@@ -1,0 +1,27 @@
+:host{
+    min-height: 100vh;
+    height: auto;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+  }
+
+.content{
+    flex:1;
+    display: flex;
+}
+
+.dark-mode-toggle{
+    margin-left:auto;
+    display: flex;
+}
+
+.toggle-control{
+    margin-left: 7px;
+    margin-right: 5px;
+}
+
+.dark-icon{
+    margin-left:auto;
+}

@@ -1,0 +1,38 @@
+<div class="sign-up-page-container">
+    <mat-form-field>
+        <mat-label>Username:</mat-label>
+        <input matInput [(ngModel)]="username" [formControl]="usernameFormControl" [errorStateMatcher]="matcher">
+        <mat-error *ngIf="!usernameFormControl.hasError('required')">
+            Please enter a username.
+        </mat-error>
+        <mat-error *ngIf="usernameFormControl.hasError('required')">
+            Username is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Email Address:</mat-label>
+        <input type="email" matInput [(ngModel)]="emailAddress" [formControl]="emailAddressFormControl"
+            [errorStateMatcher]="matcher">
+        <mat-error *ngIf="!emailAddressFormControl.hasError('required')">
+            Please enter an email address.
+        </mat-error>
+        <mat-error *ngIf="emailAddressFormControl.hasError('required')">
+            Email address is <strong>required</strong>
+        </mat-error>
+        <mat-error *ngIf="emailAddressFormControl.hasError('email')">
+            Email address is invalid.
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Password:</mat-label>
+        <input type="password" matInput [(ngModel)]="password" [formControl]="passwordFormControl"
+            [errorStateMatcher]="matcher">
+        <mat-error *ngIf="!passwordFormControl.hasError('required')">
+            Please enter a password.
+        </mat-error>
+        <mat-error *ngIf="passwordFormControl.hasError('required')">
+            Password is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+    <button mat-button (click)="createUser()">Sign Up</button>
+</div>

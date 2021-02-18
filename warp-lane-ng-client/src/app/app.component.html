@@ -1,1 +1,15 @@
-<router-outlet></router-outlet>
+<mat-toolbar color="primary">
+
+    <button class="bottom-button" routerLink="/sign-up">
+        Sign Up
+    </button>
+    <div class="dark-mode-toggle">
+        <mat-icon>brightness_5</mat-icon>
+        <mat-slide-toggle [formControl]="toggleControl" class="toggle-control">
+        </mat-slide-toggle>
+        <mat-icon class="dark-icon">bedtime</mat-icon>
+    </div>
+</mat-toolbar>
+<div class="content mat-app-background">
+    <router-outlet></router-outlet>
+</div>

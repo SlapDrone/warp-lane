@@ -6,7 +6,7 @@ import { TrackControllerService } from '../track-controller.service';
 @Component({
   selector: 'wl-track-modifier',
   templateUrl: './track-modifier.component.html',
-  styleUrls: ['./track-modifier.component.sass']
+  styleUrls: ['./track-modifier.component.scss']
 })
 export class TrackModifierComponent implements OnInit {
 

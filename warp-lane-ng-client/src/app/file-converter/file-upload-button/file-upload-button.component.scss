@@ -1,0 +1,10 @@
+:host{
+    flex-align: center;
+    align: center;
+}
+
+::ng-deep mat-spinner{
+    stroke: white;
+}
+.uploader-status{
+    padding-bottom: 20px;}

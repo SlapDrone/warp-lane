@@ -17,8 +17,15 @@ export class ApiService {
     }
 
     public login(body: any, customHeaders: HttpHeaders = new HttpHeaders()): Observable<any> {
-        console.log('Logging in.');
+        console.log('Signing in.');
         const endpoint = '/login';
+
+        return this._basePost(body, endpoint, customHeaders);
+    }
+
+    public createUser(body: any, customHeaders: HttpHeaders = new HttpHeaders()): Observable<any> {
+        console.log('Signing up.');
+        const endpoint = '/create_user';
 
         return this._basePost(body, endpoint, customHeaders);
     }

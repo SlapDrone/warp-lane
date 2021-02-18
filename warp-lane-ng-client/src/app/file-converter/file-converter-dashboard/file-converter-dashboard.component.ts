@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'wl-file-converter-dashboard',
   templateUrl: './file-converter-dashboard.component.html',
-  styleUrls: ['./file-converter-dashboard.component.sass']
+  styleUrls: ['./file-converter-dashboard.component.scss']
 })
 export class FileConverterDashboardComponent {
   /*
