@@ -31,3 +31,9 @@ if __name__ == "__main__":
     my_hash_and_salt = "$2b$12$Yc2qjXGtOsFqR6ck6v2ruOCIM6FRjIpsnf5zL54H/CPnmt7KhldHO"
     valid = check_password("secret", my_hash_and_salt.encode("utf8"))
     print(valid)
+    encrypted_password = encrypt_password("test")
+    print(encrypted_password)
+    # noinspection SpellCheckingInspection
+    my_hash_and_salt = "$2b$12$Yc2qjXGtOsFqR6ck6v2ruOCIM6FRjIpsnf5zL54H/CPnmt7KhldHO"
+    valid = check_password("secret", my_hash_and_salt.encode("utf8"))
+    print(valid)

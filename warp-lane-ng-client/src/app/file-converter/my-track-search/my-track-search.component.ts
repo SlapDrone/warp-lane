@@ -8,7 +8,7 @@ import { TrackControllerService } from '../track-controller.service';
 @Component({
   selector: 'wl-my-track-search',
   templateUrl: './my-track-search.component.html',
-  styleUrls: ['./my-track-search.component.sass']
+  styleUrls: ['./my-track-search.component.scss']
 })
 export class MyTrackSearchComponent implements OnInit {
 
@@ -26,10 +26,6 @@ export class MyTrackSearchComponent implements OnInit {
   ngOnInit(): void {
     this.entityService.clear();
     this.entityService.setCurrentEntity({name: 'Select a track to begin modification.'});
-  }
-
-  trackSelect(track: any): void{
-    this.trackController.selectedTrack = track;
   }
 
   addFile(file): void{

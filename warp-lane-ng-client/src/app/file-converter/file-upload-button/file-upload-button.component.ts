@@ -8,7 +8,7 @@ import { TrackControllerService } from '../track-controller.service';
 @Component({
   selector: 'wl-file-upload-button',
   templateUrl: './file-upload-button.component.html',
-  styleUrls: ['./file-upload-button.component.sass']
+  styleUrls: ['./file-upload-button.component.scss']
 })
 export class FileUploadButtonComponent implements OnInit {
 

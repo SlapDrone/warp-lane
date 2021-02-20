@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 import { ApiService } from '../core/http/api.service';
 
@@ -20,12 +21,22 @@ export class LoginService {
         );
     }
 
-    private _sessionId: string;
+
+    public sessionId: string;
+
+    private isLoggedInSubject = new BehaviorSubject<boolean>(false);
+
+    isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
+
+    setLoggedIn(val: boolean) {
+        this.isLoggedInSubject.next(val);
+    }
 
     private handleSuccess(data: any): void {
         console.log()
         console.log('Login Successful');
-        this._sessionId = data['session_id'];
+        this.sessionId = data['session_id'];
+        this.setLoggedIn(true);
     }
 
     private handleError(data: any): void {

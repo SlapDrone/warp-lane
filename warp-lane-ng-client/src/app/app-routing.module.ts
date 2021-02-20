@@ -3,12 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { FileConverterDashboardComponent } from './file-converter/file-converter-dashboard/file-converter-dashboard.component';
 import { MyTrackSearchComponent } from './file-converter/my-track-search/my-track-search.component';
 import { TrackModifierComponent } from './file-converter/track-modifier/track-modifier.component';
+import { HomeScreenComponent } from './home-screen/home-screen.component';
+import { LoggedOut } from './logged-out-router-guard';
+import { SignUpPageComponent } from './user/sign-up-page/sign-up-page.component';
 
 
 const routes: Routes = [
   {
     path: 'file-converter',
     component: FileConverterDashboardComponent,
+    canActivate: [LoggedOut],
     children: [
       {
         path: '',
@@ -21,8 +25,16 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'sign-up',
+    component: SignUpPageComponent
+  },
+  {
+    path: 'home',
+    component: HomeScreenComponent
+  },
+  {
     path: '',
-    redirectTo: '/file-converter',
+    redirectTo: '/home',
     pathMatch: 'full'
   }
 ];

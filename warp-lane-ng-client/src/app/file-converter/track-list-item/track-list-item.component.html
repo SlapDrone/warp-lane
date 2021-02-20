@@ -1,0 +1,4 @@
+<div [ngStyle]="{'background-color': bgColor}" class="track-list-item-container" routerLink="/file-converter/track-modifier"
+    (click)="trackSelect(track)" (mouseenter)="onTrackMouseEnter($event)" (mouseleave)="onTrackMouseLeave($event)">
+    <span class="track-list-item-text">{{track.name}}</span><mat-icon class="arrow-icon">arrow_forward_ios</mat-icon>
+</div>

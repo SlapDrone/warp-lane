@@ -4,7 +4,7 @@ import { EntityService } from 'src/app/core/entity.service';
 @Component({
   selector: 'wl-top-bar',
   templateUrl: './top-bar.component.html',
-  styleUrls: ['./top-bar.component.sass']
+  styleUrls: ['./top-bar.component.scss']
 })
 export class TopBarComponent implements OnInit {
 

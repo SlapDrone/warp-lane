@@ -4,7 +4,7 @@ import { TrackControllerService } from '../track-controller.service';
 @Component({
   selector: 'wl-knob',
   templateUrl: './knob.component.html',
-  styleUrls: ['./knob.component.sass']
+  styleUrls: ['./knob.component.scss']
 })
 export class KnobComponent implements OnInit {
 

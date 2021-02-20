@@ -1,6 +1,7 @@
 import warp_lane_server.managers.user_manager as user_man
 import warp_lane_server.exceptions as wl_exceptions
 import warp_lane_server.text as wl_text
+from warp_lane_server.utils.password_encryptor import encrypt_password
 
 from sanic import Sanic, response
 from sanic.response import json
@@ -66,6 +67,50 @@ def login(request):
         return json(
             {wl_text.generic_error_key: wl_text.login_message_bad_pw},
             status=400,
+        )
+
+
+@app.post("/create_user")
+def create_user(request):
+    """
+    Handle HTTP requests to create a user.
+
+    If successfully created, returns a session ID that is needed
+    for all other endpoints.
+
+    If username, email_address or password are missing, 
+    status 400 response with reason in "error" json field.
+    """
+    # Ensure the request matches specification.
+    try:
+        # SM: hackily modified this for the sake of the webapp feel free to refactor!
+        if request.body:
+            body = json_loads(request.body)
+            username = body[wl_text.login_param_username]
+            given_password = body[wl_text.login_param_password]
+            email_address = body[wl_text.login_param_email_address]
+    except (KeyError, IndexError):
+        return json(
+            {wl_text.generic_error_key: wl_text.generic_message_malformed},
+            status=400,
+        )
+
+    # Use the backend to get a session ID.
+    try:
+        encrypted_password = encrypt_password(given_password)
+        user_man.create_user(username, encrypted_password, email_address)
+        
+        session_id = user_man.login_backend(username, given_password)
+        return json(
+            {wl_text.session_id_key: session_id},
+            status=200
+        )
+    # Handle bad usernames or passwords.
+    except Exception:
+        logger.exception("Create user error.")
+        return json(
+            {wl_text.generic_error_key: wl_text.create_user_error},
+            status=500,
         )
 
 
