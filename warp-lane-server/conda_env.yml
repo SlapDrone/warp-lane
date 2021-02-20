@@ -8,6 +8,7 @@ dependencies:
   - dateutils
   - psycopg2
   - sanic
+  - sanic-cors
   - requests
   - pytest
   - pip

@@ -11,6 +11,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FileConverterRoutingModule } from './file-converter-routing.module';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
+import { UserModule } from '../user/user.module';
 
 
 
@@ -18,13 +19,15 @@ import { BottomBarComponent } from './bottom-bar/bottom-bar.component';
   declarations: [
     FileUploadButtonComponent,
     FileConverterDashboardComponent,
-    KnobComponent, MyTrackSearchComponent, TrackModifierComponent, TopBarComponent, BottomBarComponent],
+    KnobComponent, MyTrackSearchComponent, 
+    TrackModifierComponent, TopBarComponent, BottomBarComponent],
   imports: [
     BrowserModule,
     CommonModule,
     WlCoreModule,
     MatProgressSpinnerModule,
-    FileConverterRoutingModule
+    FileConverterRoutingModule,
+    UserModule
   ]
 })
 export class FileConverterModule { }
