@@ -17,22 +17,12 @@ export class SignUpPageComponent implements OnInit {
 
     ngOnInit(): void {
     }
-    public username: string;
-
-    public password: string;
-
-    public emailAddress: string;
-
-    public get canLogin(): boolean {
-        return this.usernameFormControl.valid
-            && this.passwordFormControl.valid;
-    }
 
     createUser = () => {
         const body = {
-            'username': this.username,
-            'password': this.password,
-            'email_address': this.emailAddress
+            'username': this.usernameFormControl.value,
+            'password': this.passwordFormControl.value,
+            'email_address': this.emailAddressFormControl.value
         }
         this.apiService.createUser(body).subscribe(
             success => this.handleSuccess(success),
@@ -40,13 +30,19 @@ export class SignUpPageComponent implements OnInit {
         )
     }
 
-    private handleSuccess(success){
+    public get canCreate() {
+        return this.usernameFormControl.valid
+            && this.passwordFormControl.valid
+            && this.emailAddressFormControl.valid;
+    }
+
+    private handleSuccess(success) {
         console.log(success)
         console.log(success.session_id)
         this.loginService.sessionId = success.session_id
     }
 
-    private handleError(error){
+    private handleError(error) {
         console.error(error.error)
     }
 

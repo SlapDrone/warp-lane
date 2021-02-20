@@ -28,10 +28,6 @@ export class MyTrackSearchComponent implements OnInit {
     this.entityService.setCurrentEntity({name: 'Select a track to begin modification.'});
   }
 
-  trackSelect(track: any): void{
-    this.trackController.selectedTrack = track;
-  }
-
   addFile(file): void{
     if (file.type !== 'audio/x-wav' && file.type !== 'audio/wav'){
       // TODO SM: alerting code to be added.

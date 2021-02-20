@@ -1,0 +1,19 @@
+.track-list-item-container{
+    display: flex;
+    flex: 1;
+    cursor: pointer;
+    padding: 8px 16px 8px 16px;
+
+    &:hover{
+        opacity: 85%;
+    }
+
+}
+
+.arrow-icon{
+    margin-left: auto;
+}
+
+.track-list-item-text{
+    padding-top: 3px;
+}

@@ -1,13 +1,13 @@
 <div class="track-list-container">
+    <button mat-button class="upload-button" (click)="uploader.click()" color="accent">
+        <span class="upload-text-icon">Upload Track <mat-icon class="upload-icon">add</mat-icon></span>
+    </button>
+    <input hidden type="file" #uploader (change)="uploadFile($event)" />
     <div class="track-list" *ngIf="trackList.length">
         <div class="track-list-section">
-            <div 
-                class="track-list-item" 
-                *ngFor="let track of trackList"
-                routerLink="/file-converter/track-modifier"
-                (click)="trackSelect(track)"
-            >
-                <span class="track-list-item-text">{{track.name}}</span><img class="list-arrow" src="assets/chevron_two.svg">
+            <div class="track-list-header mat-primary">Track List</div>
+            <div class="wl-track-list-item" *ngFor="let track of trackList">
+                <wl-track-list-item [track]="track"></wl-track-list-item>
             </div>
         </div>
         <div wlDropArea [dropFunction]="uploadFile" class="drop-zone" id="dropzone">
@@ -16,24 +16,11 @@
             </span>
         </div>
     </div>
-    <div wlDropArea *ngIf="!trackList.length" [dropFunction]="uploadFile" class="drop-zone drop-zone-only" id="dropzone">
+    <div wlDropArea *ngIf="!trackList.length" [dropFunction]="uploadFile" class="drop-zone drop-zone-only"
+        id="dropzone">
         <span>
             No files uploaded.
             Drag and drop files here or upload using the upload button.
         </span>
     </div>
 </div>
-
-<wl-bottom-bar>
-    <div class="bottom-button-bar-left-group">
-        <button class="bottom-button" (click)="uploader.click()">
-            Upload
-        </button>
-        <input 
-            hidden
-            type="file" 
-            #uploader
-            (change)="uploadFile($event)"
-        />
-    </div>
-</wl-bottom-bar>

@@ -5,15 +5,15 @@
     font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
-  }
+}
+
+.drawer-container{
+    min-height: 100vh;
+    height: auto;
+}
 
 .content{
     flex:1;
-    display: flex;
-}
-
-.dark-mode-toggle{
-    margin-left:auto;
     display: flex;
 }
 
@@ -22,6 +22,48 @@
     margin-right: 5px;
 }
 
-.dark-icon{
+.drawer-close-button-container{
+    display: flex;
+    width: 100%;
+
+    ::ng-deep .mat-button-wrapper{
+        margin-left: auto;
+    }
+}
+
+.drawer-close-button{
     margin-left:auto;
+    cursor: pointer;
+}
+
+.burger-menu{
+    height: 35px;
+    width: 35px;
+    font-size: 35px;
+}
+
+.drawer-content{
+    display: flex;
+    flex-direction: column;
+}
+
+.drawer{
+    width: 300px;
+}
+
+.right-button{
+    margin-left: auto;
+}
+
+.sign-in-up-container{
+    display: flex;
+}
+
+.sign-up-button{
+    margin-right: 5px;
+}
+
+.sign-in-out-button{
+    flex: 1;
+    max-width: 50%;
 }

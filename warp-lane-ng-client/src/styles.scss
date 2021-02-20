@@ -2,7 +2,7 @@
 
 @import "~@angular/material/theming";
 @include mat-core();
-$angular-primary: mat-palette($mat-teal, 500, 100, 900);
+$angular-primary: mat-palette($mat-blue, 500, 100, 900);
 $angular-accent: mat-palette($mat-pink, A200, A100, A400);
 $angular-warn: mat-palette($mat-red);
 
@@ -39,4 +39,11 @@ html, body {
 
 .drop-hover{
     opacity: 50%;
+}
+
+.burger-menu-button{
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  border-bottom: 1px #686666 solid !important;
 }
