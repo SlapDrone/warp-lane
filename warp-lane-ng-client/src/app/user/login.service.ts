@@ -41,7 +41,6 @@ export class LoginService {
     private handleSuccess(data: any): void {
         console.log()
         console.log('Login Successful');
-        console.log(data)
         this.accessToken = data['access_token'];
         this.setLoggedIn(true);
     }
