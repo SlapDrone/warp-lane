@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
@@ -11,18 +12,19 @@ export class LoginService {
     constructor(private apiService: ApiService) { }
 
     public login(username: string, password: string): void {
-        const body = {
-            'username': username,
-            'password': password
-        };
-        this.apiService.login(body).subscribe(
+        const body = `username=${username}&password=${password}`
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'accept': 'application/json'
+        });
+        this.apiService.login(body, headers).subscribe(
             success => this.handleSuccess(success),
             error => this.handleError(error)
         );
     }
 
 
-    public sessionId: string;
+    public accessToken: string;
 
     private isLoggedInSubject = new BehaviorSubject<boolean>(false);
 
@@ -35,7 +37,8 @@ export class LoginService {
     private handleSuccess(data: any): void {
         console.log()
         console.log('Login Successful');
-        this.sessionId = data['session_id'];
+        console.log(data)
+        this.accessToken = data['access_token'];
         this.setLoggedIn(true);
     }
 

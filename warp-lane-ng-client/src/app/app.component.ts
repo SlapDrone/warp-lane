@@ -33,7 +33,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     public get isSignedOut(){
-        return !this.loginService.sessionId;
+        return !this.loginService.accessToken;
     }
 
     public modeText: string = 'Dark Mode';

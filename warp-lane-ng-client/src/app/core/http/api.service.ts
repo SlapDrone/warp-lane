@@ -8,17 +8,17 @@ import { Observable } from 'rxjs';
 export class ApiService {
 
 
-    PORT = 8001;
+    PORT = 8000;
 
     constructor(private http: HttpClient) { }
 
     private get serverUrl(): string {
-        return `http://0.0.0.0:${this.PORT}`;
+        return `http://127.0.0.1:${this.PORT}`;
     }
 
     public login(body: any, customHeaders: HttpHeaders = new HttpHeaders()): Observable<any> {
         console.log('Signing in.');
-        const endpoint = '/login';
+        const endpoint = '/token';
 
         return this._basePost(body, endpoint, customHeaders);
     }

@@ -39,7 +39,7 @@ export class SignUpPageComponent implements OnInit {
     private handleSuccess(success) {
         console.log(success)
         console.log(success.session_id)
-        this.loginService.sessionId = success.session_id
+        this.loginService.accessToken = success.session_id
     }
 
     private handleError(error) {
