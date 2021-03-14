@@ -4,6 +4,9 @@
             <mat-icon class="drawer-close-button" (click)="drawer.toggle()">close</mat-icon>
         </button>
         <button mat-button class="burger-menu-button" (click)="toggleTheme()">{{modeText}}</button>
+        <button mat-button class="logout-button burger-menu-button" *ngIf="!isSignedOut" (click)="logout();drawer.toggle()">
+            Sign Out
+        </button>
         <span class="sign-in-up-container">
             <wl-login-button class="sign-in-out-button" *ngIf="isSignedOut" (click)="drawer.toggle()"></wl-login-button>
             <button *ngIf="isSignedOut" mat-button class="sign-in-out-button burger-menu-button" routerLink="/sign-up">

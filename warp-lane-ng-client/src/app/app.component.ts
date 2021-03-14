@@ -59,4 +59,8 @@ export class AppComponent implements OnInit, OnDestroy {
             this.toggleLightMode();
         }
     }
+    
+    public logout(){
+        this.loginService.logout();
+    }
 }

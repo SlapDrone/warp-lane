@@ -23,6 +23,10 @@ export class LoginService {
         );
     }
 
+    public logout(): void{
+        this.accessToken = undefined;
+        this.setLoggedIn(false);
+    }
 
     public accessToken: string;
 
