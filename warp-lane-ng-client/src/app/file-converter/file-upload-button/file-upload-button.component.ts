@@ -37,9 +37,15 @@ export class FileUploadButtonComponent implements OnInit {
     else{
       this.trackController.originalFile = file;
 
-      let headers = new HttpHeaders();
+      let headers = new HttpHeaders({
+        'accept': 'application/json'
+      });
+      const formData = new FormData()
+      formData.append('user_id', '1')
+      formData.append('file', file);
       headers = headers.append('file-name', this.trackController.originalFile.name);
-      this.apiService.uploadToServer(this.trackController.originalFile, headers)
+
+      this.apiService.uploadToServer(formData, headers)
         .subscribe(
           success => this.handleUploadSuccess(this.trackController.originalFile.name, success),
           error => this.handleUploadError(this.trackController.originalFile.name, error)

@@ -32,7 +32,7 @@ export class ApiService {
 
     public uploadToServer(body: any, customHeaders: HttpHeaders = new HttpHeaders()): Observable<any> {
         console.log('Posting to server.');
-        const endpoint = '/upload';
+        const endpoint = '/tracks/upload';
 
         return this._basePost(body, endpoint, customHeaders);
     }

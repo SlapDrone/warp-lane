@@ -20,9 +20,15 @@ export class TrackModifierComponent implements OnInit {
   }
 
   submitTrack(): void{
-    let headers = new HttpHeaders();
-    headers = headers.append('file-name', this.trackController.originalFile.name);
-    this.apiService.uploadToServer(this.trackController.originalFile, headers)
+
+    let headers = new HttpHeaders({
+      'accept': 'application/json'
+    });
+    const formData = new FormData()
+    console.log(this.trackController.originalFile instanceof Blob)
+    formData.append('user_id', '2')
+    formData.append('file', <Blob><any>this.trackController.originalFile);
+    this.apiService.uploadToServer(formData, headers)
       .subscribe(
         success => this.handleUploadSuccess(this.trackController.originalFile.name, success),
         error => this.handleUploadError(this.trackController.originalFile.name, error)
