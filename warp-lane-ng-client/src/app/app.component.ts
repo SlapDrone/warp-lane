@@ -2,6 +2,7 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { ApiService } from './core/http/api.service';
 import { Theme } from './theme.enum';
 import { ThemeService } from './theme.service';
 import { LoginService } from './user/login.service';
@@ -21,9 +22,17 @@ export class AppComponent implements OnInit, OnDestroy {
         private dialog: MatDialog,
         private overlay: OverlayContainer,
         private loginService: LoginService,
-        private themeService: ThemeService) { }
+        private themeService: ThemeService,
+        private apiService: ApiService) { 
+            this.apiService.getCurrentUser().subscribe(
+                success => this.handleGetUserSuccess(success)
+            )
+            this.loginService.isLoggedIn$.subscribe(val => {
+                this._isSignedOut = !val})
+        }
 
     private subscriptions: Subscription[] = [];
+    private _isSignedOut = true;
 
     ngOnInit(): void {
     }
@@ -33,7 +42,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     public get isSignedOut(){
-        return !this.loginService.accessToken;
+        return this._isSignedOut;
     }
 
     public modeText: string = 'Dark Mode';
@@ -62,5 +71,9 @@ export class AppComponent implements OnInit, OnDestroy {
     
     public logout(){
         this.loginService.logout();
+    }
+
+    private handleGetUserSuccess(success){
+        this.loginService.setLoggedIn(true);
     }
 }

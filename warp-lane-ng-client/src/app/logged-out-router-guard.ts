@@ -14,7 +14,7 @@ export class LoggedOut implements CanActivate {
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): boolean {
         // your  logic goes here
-        if (this.loginService.accessToken) {
+        if (this.loginService.isLoggedIn) {
             return true;
         } else {
             this.router.navigate(['/home']);

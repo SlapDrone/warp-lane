@@ -23,9 +23,23 @@ export class ApiService {
         return this._basePost(body, endpoint, customHeaders);
     }
 
+    public logout(body: any = {}, customHeaders: HttpHeaders = new HttpHeaders()):Observable<any> {
+        console.log('Signing out.');
+        const endpoint = '/logout';
+
+        return this._basePost(body, endpoint, customHeaders);
+    }
+
+    public getCurrentUser(body: any = {}, customHeaders: HttpHeaders = new HttpHeaders()): Observable<any> {
+        console.log('Getting current user.');
+        const endpoint = '/users/me';
+
+        return this.http.get(this.serverUrl + endpoint, { withCredentials: true })
+    }
+
     public createUser(body: any, customHeaders: HttpHeaders = new HttpHeaders()): Observable<any> {
-        console.log('Signing up.');
-        const endpoint = '/create_user';
+        console.log('creating user.');
+        const endpoint = '/users/create';
 
         return this._basePost(body, endpoint, customHeaders);
     }
@@ -43,7 +57,7 @@ export class ApiService {
         for (const key of customHeaders.keys()) {
             headers = headers.append(key, customHeaders.getAll(key));
         }
-        const options = { headers };
+        const options = { headers, withCredentials: true , observe: 'response' as 'response'};
         return this.http.post(this.serverUrl + endpoint, body, options);
     }
 

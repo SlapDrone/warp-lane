@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroupDirective, NgForm } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
@@ -24,7 +25,11 @@ export class SignUpPageComponent implements OnInit {
             'password': this.passwordFormControl.value,
             'email_address': this.emailAddressFormControl.value
         }
-        this.apiService.createUser(body).subscribe(
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'accept': 'application/json'
+        });
+        this.apiService.createUser(body, headers).subscribe(
             success => this.handleSuccess(success),
             error => this.handleError(error)
         )
@@ -39,7 +44,7 @@ export class SignUpPageComponent implements OnInit {
     private handleSuccess(success) {
         console.log(success)
         console.log(success.session_id)
-        this.loginService.accessToken = success.session_id
+        this.loginService.setLoggedIn(true);
     }
 
     private handleError(error) {

@@ -10,4 +10,6 @@ export class UserDetailsService {
   constructor(private entityService: EntityService) { }
 
   trackCollection: ITrackDetails[] = [];
+
+  username: string;
 }

@@ -24,24 +24,36 @@ export class LoginService {
     }
 
     public logout(): void{
-        this.accessToken = undefined;
-        this.setLoggedIn(false);
+        this.apiService.logout().subscribe(
+            success => this.handleLogoutSuccess(success),
+            error => this.handleLogoutError(error)
+        );
     }
 
-    public accessToken: string;
+    private handleLogoutSuccess(success){
+        console.log('Logged out')
+        this.setLoggedIn(false);
+    }
+    private handleLogoutError(error){
+        console.log('Logged out')
+        this.setLoggedIn(false);
+    }
 
     private isLoggedInSubject = new BehaviorSubject<boolean>(false);
 
     isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
+
+    get isLoggedIn(){
+        return this.isLoggedInSubject.value;
+    }
 
     setLoggedIn(val: boolean) {
         this.isLoggedInSubject.next(val);
     }
 
     private handleSuccess(data: any): void {
-        console.log()
+        console.log('response headers',data.headers.keys())
         console.log('Login Successful');
-        this.accessToken = data['access_token'];
         this.setLoggedIn(true);
     }
 
